@@ -11,6 +11,10 @@ const methodOverride = require('method-override');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const passportLocalMongoose = require('passport-local-mongoose');
+
 const hbs = exphbs.create({  
 //   helpers:require('./ulti/helpers'),
   extname: '.hbs'
@@ -35,6 +39,9 @@ app.set("views", path.join(__dirname, 'resources/views'))
 // app.use(express.static('src/public')); dsadkjadsajdhl
 app.use(express.static(path.join(__dirname, 'public')))
 
+//Mongoose
+// const User = require('../models/user')
+
 //HTTP Loggers
 app.use(morgan('combined'));
 
@@ -43,6 +50,24 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(methodOverride('_method'));
 app.use(bodyParser.json())
+
+
+//PASSPORT REGISTER LOGIN
+app.use(require("express-session")({
+  secret: "keyboard cat",
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// // const User = require('./models/User');
+// passport.use(User.createStrategy());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
+
+
 
 //-----------------------------------
 // ROUTING tới các chức năng

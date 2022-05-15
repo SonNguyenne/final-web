@@ -90,6 +90,11 @@
                 <label for="cmndback">CMND Back</label>
                 <input class="form-control" type="file" id="cmndback" name="cmndback">
             </div>
+             {{#if msg}}
+                        <div class="p-2 alert alert-danger mt-1" role="alert">
+                            <span>{{msg}}</span>
+                        </div>
+                    {{/if}}
             <div class="mt-4">
                 <button type="submit" class="btn btn-black">Register</button>
             </div>

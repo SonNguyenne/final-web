@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const { multipleMongooseToObject } = require('../ulti/mongoose')
 const { mongooseToObject } = require('../ulti/mongoose')
-const { checkUserExist, makePassword ,upload} = require('../ulti/register')
+const { checkUserExist, makePassword, upload } = require('../ulti/register')
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
@@ -15,11 +15,11 @@ const jwt = require('jsonwebtoken');
 //         roles: 'admin',
 //         username: 'admin',
 //         password: hash,
-        
+
 //     })
 //     console.log("1")
 //     user.save(() => {
-    
+
 //     });
 // });
 
@@ -44,75 +44,90 @@ class SiteController {
 
     // [POST] /register/registerSuccess
     registerSuccess(req, res) {
-        // const phone = req.body.user.phone
-        // const email = req.body.user.email
-        // Users.findOne({ $or: [{ email: email }, { phone: phone }}).then(data => {
-        //     return res.json({ msg: 'Email hoặc số điện thoại đã tồn tại!', success: false })
-        // }).catch(err => {
-        //     console.log(err)
-        // })
+
+
         // random username
-        upload(req, res,function(err){
-            let username = Math.random() * (9999999999 - 1000000000) + 1000000000;
-            while (checkUserExist(username)) {
-                username = Math.random() * (9999999999 - 1000000000) + 1000000000;
-            }
-            username = parseInt(username)
-            //Tạo password ngẫu nhiên
-            let temp = makePassword()
-            bcrypt.hash(temp, 10, function (err, hash) {
-                const user = new User({
-                    roles: 'user',
-                    username: username,
-                    password: hash,
-                    phone: req.body.phone,
-                    email: req.body.email,
-                    fullname: req.body.fullname,
-                    address: req.body.address,
-                    birthday: req.body.birthday,
-                    cmndfront: req.files.cmndfront[0].path,
-                    cmndback: req.files.cmndback[0].path,
-                    countlogin: 0,
-                    countFailed: 0,
-                    status: 'waitConfirm'
-                })
-                user.save((error, userResult) => {
-                    if (error) {
-                        console.log(error)
-                        return res.json({ msg: 'Đăng ký thất bai', success: false })
+        upload(req, res, function (err) {
+            const phone = req.body.phone
+            const email = req.body.email
+            User.findOne({
+                $or: [
+                    { email: req.body.email },
+                    { phone: req.body.phone }
+                ]
+            }).then(data => {
+                console.log(data);
+                if(data!=null) {
+                    return res.render('register', {
+                        success: false,
+                        msg: `Sdt da ton tai`
+                    })
+                }else{
+                    let username = Math.random() * (9999999999 - 1000000000) + 1000000000;
+                    while (checkUserExist(username)) {
+                        username = Math.random() * (9999999999 - 1000000000) + 1000000000;
                     }
-    
-                    //send username and password to user
-                    var transporter = nodemailer.createTransport({
-                        service: 'gmail',
-                        auth: {
-                            user: "ts29032001@gmail.com",
-                            pass: "123456son"
-                        }
+                    username = parseInt(username)
+                    //Tạo password ngẫu nhiên
+                    let temp = makePassword()
+                    bcrypt.hash(temp, 10, function (err, hash) {
+                        const user = new User({
+                            roles: 'user',
+                            username: username,
+                            password: hash,
+                            phone: req.body.phone,
+                            email: req.body.email,
+                            fullname: req.body.fullname,
+                            address: req.body.address,
+                            birthday: req.body.birthday,
+                            cmndfront: req.files.cmndfront['0'].path,
+                            cmndback: req.files.cmndback['0'].path,
+                            countlogin: 0,
+                            countFailed: 0,
+                            status: 'waitConfirm'
+                        })
+                        user.save((error, userResult) => {
+                            if (error) {
+                                console.log(error)
+                                return res.json({ msg: 'Đăng ký thất bai', success: false })
+                            }
+        
+                            //send username and password to user
+                            var transporter = nodemailer.createTransport({
+                                service: 'gmail',
+                                auth: {
+                                    user: "ts29032001@gmail.com",
+                                    pass: "123456son"
+                                }
+                            });
+        
+                            var mailOptions = {
+                                from: process.env.GMAIL,
+                                to: req.body.email,
+                                subject: 'Final-web - This is your account',
+                                text: `information about this:
+                                    username: ${username}
+                                    password: ${temp}
+                                `
+                            };
+        
+                            transporter.sendMail(mailOptions, function (error, info) {
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    console.log('Email sent: ' + info.response);
+        
+                                }
+                            });
+                            return res.render('login')
+                        });
+        
                     });
-    
-                    var mailOptions = {
-                        from: process.env.GMAIL,
-                        to: req.body.email,
-                        subject: 'Final-web - This is your account',
-                        text: `information about this:
-                            username: ${username}
-                            password: ${temp}
-                        `
-                    };
-    
-                    transporter.sendMail(mailOptions, function (error, info) {
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            console.log('Email sent: ' + info.response);
-    
-                        }
-                    });
-                    console.log(req.body.cmndback);
-                    return res.json({ success: true, msg: 'Đăng ký thành công' })
-                });
-            });
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+           
         });
 
     }
@@ -136,23 +151,23 @@ class SiteController {
                 return console.log(err)
             }
             if (!user) {
-                return res.render('login', { 
-                    success: false, 
-                    msg: `Sai tài khoản hoặc mật khẩu` 
+                return res.render('login', {
+                    success: false,
+                    msg: `Sai tài khoản hoặc mật khẩu`
                 })
             }
             //kiểm tra nếu count = 10 thì là đang khoá tạm thời
             if (user.countFailed == 10) {
-                return res.render('login',{ 
-                    success: false, 
-                    msg: `Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút` 
+                return res.render('login', {
+                    success: false,
+                    msg: `Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút`
                 })
             }
             //kiểm tra nếu count = 10 thì là đang khoá tạm thời
             if (user.countFailed == 6) {
-                return res.render('login', { 
-                    success: false, 
-                    msg: `Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản` 
+                return res.render('login', {
+                    success: false,
+                    msg: `Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản`
                 })
             }
             bcrypt.compare(password, user.password, function (err, result) {
@@ -164,11 +179,11 @@ class SiteController {
                         }
                     })
                     //Tạo ra 2 cái render theo role(Customer, Admin)
-                        // Của Customer thì đẩy về Index tổng `localhost:3000/`
-                        // Của Admin thì đẩy về Index Admin `localhost:3000/Admin`
-                            //Dùng Promise All để đẩy database của người dùng theo ID của token lên 
-                                //==> Tìm đc tên người dùng để hiển thị ở navbar với footer (của admin)
-                    return res.json({ success: true, token: token, msg: 'Đăng nhập thành công!' })
+                    // Của Customer thì đẩy về Index tổng `localhost:3000/`
+                    // Của Admin thì đẩy về Index Admin `localhost:3000/Admin`
+                    //Dùng Promise All để đẩy database của người dùng theo ID của token lên 
+                    //==> Tìm đc tên người dùng để hiển thị ở navbar với footer (của admin)
+                    return res.render('changePassword')
                 }
                 const failed = user.countFailed
                 if (failed == 2) {
@@ -183,14 +198,14 @@ class SiteController {
                     var lockAccountOneMinute = setTimeout(function () {
                         User.updateOne({ username: username }, { $set: { countFailed: 3 } }, (err, status) => {
                             if (err) {
-                                console.log(err)    
+                                console.log(err)
                             }
                         })
                         console.log(`unlock ${username} !`)
                     }, 60000);
-                    return res.render('login', { 
-                        success: false, 
-                        msg: `Tài khoản đã bị khoá trong 1 phút! Nếu bạn tiếp tục nhập sai thêm 3 lần nữa sẽ bị khoá vĩnh viễn!` 
+                    return res.render('login', {
+                        success: false,
+                        msg: `Tài khoản đã bị khoá trong 1 phút! Nếu bạn tiếp tục nhập sai thêm 3 lần nữa sẽ bị khoá vĩnh viễn!`
                     })
                 } else if (failed >= 5) {
                     User.updateOne({ username: username }, { $set: { countFailed: 6 } }, (err, status) => {
@@ -198,9 +213,9 @@ class SiteController {
                             console.log(err)
                         }
                     })
-                    return res.render('login', { 
-                        success: false, 
-                        msg: 'Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản' 
+                    return res.render('login', {
+                        success: false,
+                        msg: 'Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản'
                     })
                 } else {
                     User.updateOne({ username: username }, { $set: { countFailed: failed + 1 } }, (err, status) => {
@@ -208,9 +223,9 @@ class SiteController {
                             console.log(err)
                         }
                     })
-                    return res.render('login', { 
-                        success: false, 
-                        msg: `Bạn đã nhập sai mật khẩu ${failed + 1} lần!!!` 
+                    return res.render('login', {
+                        success: false,
+                        msg: `Bạn đã nhập sai mật khẩu ${failed + 1} lần!!!`
                     })
                 }
             });
@@ -219,13 +234,17 @@ class SiteController {
 
     }
 
-    changePassword(req,res){
+    changePassword(req, res) {
         res.render('changePassword')
     }
 
     changePasswordSuccess(req, res) {
-        const newPassword = req.body.password
-        const username = req.body.username
+        
+        const newPassword = req.body.newPassword
+        const confirmPassword = req.body.confirmPassword
+        if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
+            alert("khong trung`")
+        } else {
         bcrypt.hash(newPassword, 10, function (error, hash) {
             if (error) {
                 return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
@@ -238,7 +257,7 @@ class SiteController {
                 return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
             })
         });
-    }
+    }}
 
 }
 

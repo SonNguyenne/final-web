@@ -3,12 +3,16 @@
     "bcrypt": "^5.0.1",
     "db": "^3.3.1",
     "express": "^4.18.1",
+    "express-flash": "^0.0.2",
     "express-handlebars": "^6.0.5",
     "firebase": "^9.8.0",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongoose": "^6.3.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^7.0.0"
   },
   "name": "final-web",
   "version": "1.0.0",
