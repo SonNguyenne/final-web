@@ -1,0 +1,86 @@
+{{!-- <div class="container">
+    <form  method="post" action="/validation">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="login-form m-5 p-3 bg-light border border-4 rounded">
+                    <div class="text-center">
+                        <h1>Sign In</h1>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
+                            name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="mb-3 form-check">
+
+                        <label class="form-check-label" for="exampleCheck1"><a href="/auth/register">Have not
+                                account? Register
+                                now!</a></label>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="login()">Login</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </form>
+
+</div> --}}
+
+<a href="/register">
+    <div class="login-sidenav">
+        <div class="login-main-text">
+            <h2> Login Page</h2>
+            <p class="text-muted">Click here to <span>REGISTER</span> if you don't have an account</p>
+        </div>
+    </div>
+</a>
+
+<div class="login-main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form p-3">
+                <form action="/validation" method="POST">
+                    <div class="form-group">
+                        <label>User Name</label>
+                        <input type="text" name="username" class="form-control mt-2" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control mt-2" placeholder="Enter password">
+                    </div>
+                    <div class="mt-1 row">
+                        <div class="col">
+                        <!-- Checkbox -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="remember-me" checked />
+                            <label class="form-check-label" for="remember-me"> <i class="text-muted">Remember me</i> </label>
+                        </div>
+                        </div>
+
+                        <div class="col">
+                        <!-- Simple link -->
+                            <a href="#!"><i>Forgot password?</i></a>
+                        </div>
+                    </div>
+
+                    {{#if msg}}
+                        <div class="p-2 alert alert-danger mt-1" role="alert">
+                            <span>{{msg}}</span>
+                        </div>
+                    {{/if}}
+                    
+                    <div class="mt-4">
+                        <button type="submit" onclick="login()" class="btn btn-black">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
