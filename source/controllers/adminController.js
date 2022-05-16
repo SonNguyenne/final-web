@@ -5,6 +5,7 @@ const { mongooseToObject } = require('../ulti/mongoose')
 
 class AdminController {
     index(req, res, next) {
+        P
         res.render('admin', {
             title: 'Admin',
             layout: 'adminLayout',

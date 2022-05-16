@@ -25,14 +25,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SonNguyenne/final-web.git"
+    "url": "git+https://github.com/SonNguyenne/Ewallet-web-final.git.git"
   },
   "author": "Son",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SonNguyenne/final-web/issues"
+    "url": "https://github.com/SonNguyenne/Ewallet-web-final.git/issues"
   },
-  "homepage": "https://github.com/SonNguyenne/final-web#readme",
+  "homepage": "https://github.com/SonNguyenne/Ewallet-web-final.git#readme",
   "devDependencies": {
     "body-parser": "^1.20.0",
     "express-session": "^1.17.2",

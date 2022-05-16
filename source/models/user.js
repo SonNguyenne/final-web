@@ -1,6 +1,8 @@
 
 const mongoose = require('mongoose')
 
+const passportLocalMongoose = require('passport-local-mongoose');
+
 const User = new mongoose.Schema({
     roles: { type: String, },
     username: { type: String, },
@@ -19,6 +21,10 @@ const User = new mongoose.Schema({
     countFailed: { type: Number, },
     permission: { type: String, default: "Not Verified", },
 })
+
+
+User.plugin(passportLocalMongoose);
+
 module.exports = mongoose.model('User', User);
 
 
