@@ -26,6 +26,105 @@ const jwt = require('jsonwebtoken');
 
 class SiteController {
 
+    // [POST] /login/ validation    
+    validation(req, res) {
+        let username = req.body.username
+        let password = req.body.password
+        
+
+        User.findOne({ username: username }, (err, user) => {
+            if (err) {
+                return console.log(err)
+            }
+           
+
+            if (!user) {
+                return res.render('login', {
+                    success: false,
+                    msg: `Sai tài khoản hoặc mật khẩu`
+                })
+            }
+
+            //kiểm tra nếu count = 10 thì là đang khoá tạm thời
+            if (user.countFailed == 10) {
+                return res.render('login', {
+                    success: false,
+                    msg: `Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút`
+                })
+            }
+
+            //kiểm tra nếu count = 10 thì là đang khoá tạm thời
+            if (user.countFailed == 6) {
+                return res.render('login', {
+                    success: false,
+                    msg: `Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản`
+                })
+            }
+            console.log('check')
+            bcrypt.compare(password, user.password, function (err, result) {
+                if (result) {
+                    // tao token cho account
+                    var token = jwt.sign({ _id: user._id }, 'secretpasstoken', { expiresIn: '30m' })
+                    User.updateOne({ username: username }, { $set: { countFailed: 0 } }, (err, status) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                    //Tạo ra 2 cái render theo role(Customer, Admin)
+                    // Của Customer thì đẩy về Index tổng `localhost:3000/`
+                    // Của Admin thì đẩy về Index Admin `localhost:3000/Admin`
+                    //Dùng Promise All để đẩy database của người dùng theo ID của token lên 
+                    //==> Tìm đc tên người dùng để hiển thị ở navbar với footer (của admin)
+                    return res.json({ success: true, token: token, msg: 'Đăng nhập thành công!' })
+                }
+                const failed = user.countFailed
+                if (failed == 2) {
+                    //Khoá tạm thời set count = 10
+                    User.updateOne({ username: username }, { $set: { countFailed: 10 } }, (err, status) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+
+                    //Mở khoá tài khoản sau 1 phút, trả count về 3
+                    var lockAccountOneMinute = setTimeout(function () {
+                        User.updateOne({ username: username }, { $set: { countFailed: 3 } }, (err, status) => {
+                            if (err) {
+                                console.log(err)
+                            }
+                        })
+                        console.log(`unlock ${username} !`)
+                    }, 60000);
+                    return res.render('login', {
+                        success: false,
+                        msg: `Tài khoản đã bị khoá trong 1 phút! Nếu bạn tiếp tục nhập sai thêm 3 lần nữa sẽ bị khoá vĩnh viễn!`
+                    })
+                } else if (failed >= 5) {
+                    User.updateOne({ username: username }, { $set: { countFailed: 6 } }, (err, status) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                    return res.render('login', {
+                        success: false,
+                        msg: 'Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản'
+                    })
+                } else {
+                    User.updateOne({ username: username }, { $set: { countFailed: failed + 1 } }, (err, status) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                    return res.render('login', {
+                        success: false,
+                        msg: `Bạn đã nhập sai mật khẩu ${failed + 1} lần!!!`
+                    })
+                }
+            });
+        })
+
+
+    }
     // [GET] /
     index(req, res, next) {
         res.render('index', {
@@ -44,7 +143,6 @@ class SiteController {
 
     // [POST] /register/registerSuccess
     registerSuccess(req, res) {
-
 
         // random username
         upload(req, res, function (err) {
@@ -119,7 +217,7 @@ class SiteController {
         
                                 }
                             });
-                            return res.render('login')
+                            return res.redirect('login')
                         });
         
                     });
@@ -140,106 +238,25 @@ class SiteController {
         })
     };
 
-
-    // [POST] /login/ validation
-    validation(req, res) {
-        let username = req.body.username
-        let password = req.body.password
-
-        User.findOne({ username: username }, (err, user) => {
-            if (err) {
-                return console.log(err)
-            }
-            if (!user) {
-                return res.render('login', {
-                    success: false,
-                    msg: `Sai tài khoản hoặc mật khẩu`
-                })
-            }
-            //kiểm tra nếu count = 10 thì là đang khoá tạm thời
-            if (user.countFailed == 10) {
-                return res.render('login', {
-                    success: false,
-                    msg: `Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút`
-                })
-            }
-            //kiểm tra nếu count = 10 thì là đang khoá tạm thời
-            if (user.countFailed == 6) {
-                return res.render('login', {
-                    success: false,
-                    msg: `Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản`
-                })
-            }
-            bcrypt.compare(password, user.password, function (err, result) {
-                if (result) {
-                    var token = jwt.sign({ _id: user._id }, 'secretpasstoken', { expiresIn: '30m' })
-                    User.updateOne({ username: username }, { $set: { countFailed: 0 } }, (err, status) => {
-                        if (err) {
-                            console.log(err)
-                        }
-                    })
-                    //Tạo ra 2 cái render theo role(Customer, Admin)
-                    // Của Customer thì đẩy về Index tổng `localhost:3000/`
-                    // Của Admin thì đẩy về Index Admin `localhost:3000/Admin`
-                    //Dùng Promise All để đẩy database của người dùng theo ID của token lên 
-                    //==> Tìm đc tên người dùng để hiển thị ở navbar với footer (của admin)
-                    return res.render('changePassword')
-                }
-                const failed = user.countFailed
-                if (failed == 2) {
-                    //Khoá tạm thời set count = 10
-                    User.updateOne({ username: username }, { $set: { countFailed: 10 } }, (err, status) => {
-                        if (err) {
-                            console.log(err)
-                        }
-                    })
-
-                    //Mở khoá tài khoản sau 1 phút, trả count về 3
-                    var lockAccountOneMinute = setTimeout(function () {
-                        User.updateOne({ username: username }, { $set: { countFailed: 3 } }, (err, status) => {
-                            if (err) {
-                                console.log(err)
-                            }
-                        })
-                        console.log(`unlock ${username} !`)
-                    }, 60000);
-                    return res.render('login', {
-                        success: false,
-                        msg: `Tài khoản đã bị khoá trong 1 phút! Nếu bạn tiếp tục nhập sai thêm 3 lần nữa sẽ bị khoá vĩnh viễn!`
-                    })
-                } else if (failed >= 5) {
-                    User.updateOne({ username: username }, { $set: { countFailed: 6 } }, (err, status) => {
-                        if (err) {
-                            console.log(err)
-                        }
-                    })
-                    return res.render('login', {
-                        success: false,
-                        msg: 'Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản'
-                    })
-                } else {
-                    User.updateOne({ username: username }, { $set: { countFailed: failed + 1 } }, (err, status) => {
-                        if (err) {
-                            console.log(err)
-                        }
-                    })
-                    return res.render('login', {
-                        success: false,
-                        msg: `Bạn đã nhập sai mật khẩu ${failed + 1} lần!!!`
-                    })
-                }
-            });
-        })
-
-
+    logout(req,res){
+        req.session = null
+        res.json({ logout: true })
     }
 
+
+    
+
     changePassword(req, res) {
-        res.render('changePassword')
+        res.render('changePassword'
+        , {
+            layout: 'nopartials'
+        }
+        )
     }
 
     changePasswordSuccess(req, res) {
-        
+        console.log('vao day roi1223`')
+        const username= req.body.username
         const newPassword = req.body.newPassword
         const confirmPassword = req.body.confirmPassword
         if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
@@ -247,13 +264,17 @@ class SiteController {
         } else {
         bcrypt.hash(newPassword, 10, function (error, hash) {
             if (error) {
+                console.log(newPassword)
+                console.log(error)
+
                 return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
             }
             User.updateOne({ username: username }, { $set: { password: hash, countlogin: 1 } }, (err, status) => {
                 if (err) {
                     console.log(err)
-                    return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
+                    return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại 1' })
                 }
+                console.log('vao day roi`')
                 return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
             })
         });

@@ -14,6 +14,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const passportLocalMongoose = require('passport-local-mongoose');
+var cookieParser = require('cookie-parser')
 
 const hbs = exphbs.create({  
 //   helpers:require('./ulti/helpers'),
@@ -26,7 +27,7 @@ const app = express();
 //-----------------------------------
 // Cấu hình thư viện + Data
 //-----------------------------------
-xPORT = process.env.PORT || 3000;
+xPORT = process.env.PORT || 5000;
 
 
 // Cấu hình MVC + Engine - View
@@ -73,7 +74,6 @@ passport.deserializeUser(User.deserializeUser());
 // ROUTING tới các chức năng
 //-----------------------------------
 const Router = express.Router();
-
 
 route(app);
 

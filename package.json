@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "db": "^3.3.1",
     "express": "^4.18.1",
     "express-flash": "^0.0.2",
@@ -11,6 +13,7 @@
     "mongoose": "^6.3.2",
     "morgan": "^1.10.0",
     "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^7.0.0"
   },
