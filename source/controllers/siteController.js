@@ -5,6 +5,7 @@ const { checkUserExist, makePassword, upload } = require('../ulti/register')
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+var secret = 'secretpasstoken'
 
 
 
@@ -30,13 +31,13 @@ class SiteController {
     validation(req, res) {
         let username = req.body.username
         let password = req.body.password
-        
+
 
         User.findOne({ username: username }, (err, user) => {
             if (err) {
                 return console.log(err)
             }
-           
+
 
             if (!user) {
                 return res.render('login', {
@@ -64,10 +65,10 @@ class SiteController {
             bcrypt.compare(password, user.password, function (err, result) {
                 if (result) {
                     // tao token cho account
-                    var token = jwt.sign({ _id: user._id }, 'secretpasstoken', { expiresIn: '30m' })
+                    var token = jwt.sign({ _id: user._id }, 'secretpasstoken', { expiresIn: '60m' })
                     User.updateOne({ username: username }, { $set: { countFailed: 0 } }, (err, status) => {
                         if (err) {
-                            console.log(err)
+                            res.render('login')
                         }
                     })
                     //Tạo ra 2 cái render theo role(Customer, Admin)
@@ -110,7 +111,7 @@ class SiteController {
                         msg: 'Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản'
                     })
                 } else {
-                    User.updateOne({ username: username }, { $set: { countFailed: failed + 1, banCheck : true } }, (err, status) => {
+                    User.updateOne({ username: username }, { $set: { countFailed: failed + 1, banCheck: true } }, (err, status) => {
                         if (err) {
                             console.log(err)
                         }
@@ -127,10 +128,28 @@ class SiteController {
     }
     // [GET] /
     index(req, res, next) {
-        res.render('index', {
-            title: 'Login',
-            layout: 'nopartials'
-        })
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+        User.findOne({
+            _id: decodeToken
+        }).then(data => {
+            if (data) {
+                req.data = data
+                console.log(data)
+                return res.render('index',
+                    {
+                        user: mongooseToObject(data),
+                    })
+                next()
+            }
+
+            // res.render('admin', {
+            //     title: 'Admin',
+            //     layout: 'adminLayout',
+            //     usernameExample: 'username-example',
+            // })
+        }
+        )
     };
 
     // [GET] /register
@@ -155,12 +174,12 @@ class SiteController {
                 ]
             }).then(data => {
                 console.log(data);
-                if(data!=null) {
+                if (data != null) {
                     return res.render('register', {
                         success: false,
                         msg: `Sdt da ton tai`
                     })
-                }else{
+                } else {
                     let username = Math.random() * (9999999999 - 1000000000) + 1000000000;
                     while (checkUserExist(username)) {
                         username = Math.random() * (9999999999 - 1000000000) + 1000000000;
@@ -182,7 +201,6 @@ class SiteController {
                             cmndback: req.files.cmndback['0'].path,
                             countlogin: 0,
                             countFailed: 0,
-                            status: 'waitConfirm',
                             banCheck: false,
                         })
                         user.save((error, userResult) => {
@@ -190,7 +208,7 @@ class SiteController {
                                 console.log(error)
                                 return res.json({ msg: 'Đăng ký thất bai', success: false })
                             }
-        
+
                             //send username and password to user
                             var transporter = nodemailer.createTransport({
                                 service: 'gmail',
@@ -199,7 +217,7 @@ class SiteController {
                                     pass: "123456son"
                                 }
                             });
-        
+
                             var mailOptions = {
                                 from: process.env.GMAIL,
                                 to: req.body.email,
@@ -209,24 +227,24 @@ class SiteController {
                                     password: ${temp}
                                 `
                             };
-        
+
                             transporter.sendMail(mailOptions, function (error, info) {
                                 if (error) {
                                     console.log(error);
                                 } else {
                                     console.log('Email sent: ' + info.response);
-        
+
                                 }
                             });
                             return res.redirect('login')
                         });
-        
+
                     });
                 }
             }).catch(err => {
                 console.log(err)
             })
-           
+
         });
 
     }
@@ -239,51 +257,52 @@ class SiteController {
         })
     };
 
-    logout(req,res){
+    logout(req, res) {
         req.session = null
         res.json({ logout: true })
     }
 
 
-    
+
 
     changePassword(req, res) {
         res.render('changePassword'
-        , {
-            layout: 'nopartials'
-        }
+            , {
+                layout: 'nopartials'
+            }
         )
     }
 
     changePasswordSuccess(req, res) {
         console.log('vao day roi1223`')
-        const username= req.body.username
+        const username = req.body.username
         const newPassword = req.body.newPassword
         const confirmPassword = req.body.confirmPassword
         if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
             alert("khong trung`")
         } else {
-        bcrypt.hash(newPassword, 10, function (error, hash) {
-            if (error) {
-                return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
-            }
-            User.updateOne({ username: username }, { $set: { password: hash, countlogin: 1 } }, (err, status) => {
-                if (err) {
-                    console.log(err)
-                    return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại 1' })
+            bcrypt.hash(newPassword, 10, function (error, hash) {
+                if (error) {
+                    return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
                 }
-                console.log('vao day roi`')
-                return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
-            })
-        });
-    }}
+                User.updateOne({ username: username }, { $set: { password: hash, countlogin: 1 } }, (err, status) => {
+                    if (err) {
+                        console.log(err)
+                        return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại 1' })
+                    }
+                    console.log('vao day roi`')
+                    return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
+                })
+            });
+        }
+    }
 
-    
+
 
 }
 
 module.exports = new SiteController;
 
 const res = require('express/lib/response');
-const siteController = require('./SiteController');const { render } = require('express/lib/response');
+const siteController = require('./SiteController'); const { render } = require('express/lib/response');
 

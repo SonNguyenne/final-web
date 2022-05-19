@@ -12,60 +12,62 @@
                     User Database
                 </div>
                 <div class="card-body">
-                    <table id="datatablesSimple">
-                        <thead>
-                            <tr>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>FrontId</th>
-                                <th>BackId</th>
-                                <th>WalletId</th>
-                                <th>Status</th>
-                                <th>Permission</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>FrontId</th>
-                                <th>BackId</th>
-                                <th>WalletId</th>
-                                <th>Status</th>
-                                <th>Permission</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                           {{#ifCond user.roles '==' 'user'}}
-                            {{#each userList}}
-                            <tr>
-                                <td>{{this.email}} </td>
-                                <td>{{this.phone}}</td>
-                                <td><i class="fa fa-image"></td>
-                                <td><i class="fa fa-image"></td>
-                                <td>Wallet01</td>
-                                <td>
-                                    {{this.status}} 
-                                    <button class="btn btn-primary"><i class="fa fa-check"></i></button>
-                                </td>
-                                <td class="text-danger font-weight-bold">{{this.permission}} 
-                                    <button class="btn btn-success"><i class="fa fa-check"></i></button></td>
-                                {{#ifeq this.banCheck true }}
-                                <td>
-                                    <a  href="/admin/unBan/{{this._id}}"><button class="btn btn-success">UnBan</button></a>
-                                </td>
-                                {{else}}
-                                <td>
-                                    <a href="/admin/ban/{{this._id}}"><button class="btn btn-danger">Ban</button></a>
-                                </td>
-                                {{/ifeq}}
-                            </tr>
-                            {{/each}}
-                            {{/ifCond}}
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>FrontId</th>
+                                    <th>BackId</th>
+                                    <th>WalletId</th>
+                                    <th>Time</th>
+                                    
+                                    <th>Permission</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each userList}}
+                                <tr>
+                                    <td>{{this.email}} </td>
+                                    <td>{{this.phone}}</td>
+                                    <td><i class="fa fa-image"></td>
+                                    <td><i class="fa fa-image"></td>
+                                    <td>Wallet01</td>
+                                    <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
+
+                                    
+
+                                    <td class="text-danger font-weight-bold">
+                                        <div class="d-flex justify-content-between">
+                                            {{this.permission}}
+                                            <a href="/admin/verify/{{this._id}}"><button class="btn btn-success">
+                                                    <i class="fa fa-check"></i></button></a>
+                                        </div>
+                                        
+
+                                    </td>
+
+
+                                    {{#ifeq this.banCheck true }}
+                                    <td>
+                                        <a href="/admin/unBan/{{this._id}}"><button
+                                                class="btn btn-success">UnBan</button></a>
+                                    </td>
+                                    {{else}}
+                                    <td>
+                                        <a href="/admin/ban/{{this._id}}"><button
+                                                class="btn btn-danger">Ban</button></a>
+                                    </td>
+                                    {{/ifeq}}
+                                </tr>
+
+                                {{/each}}
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

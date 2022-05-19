@@ -26,6 +26,8 @@ router.get('/ban/:id',adminController.ban)
 router.get('/unBan/:id',adminController.unBan)
 
 
+//verify user
+router.get('/verify/:id',adminController.verify)
 
 router.use('/', isLoggined,adminController.index)
 

@@ -20,8 +20,9 @@ const User = new mongoose.Schema({
     //1. waitConfirm 2. confirmed 3.waitUpdate 4. bannedMany
     countFailed: { type: Number, },
     permission: { type: String, default: "Not Verified", },
-    banCheck: {type : Boolean, default: false}
-})
+    banCheck: {type : Boolean, default: false},
+    
+},{timestamps : true});
 
 
 User.plugin(passportLocalMongoose);

@@ -47,19 +47,20 @@ class AdminController {
         })
     };
 
+    
     userManage(req, res, next) {
         var token = req.cookies.token;
         var decodeToken = jwt.verify(token, secret)
 
 
-        Promise.all([Users.find({}), Users.findOne({ _id: decodeToken })])
+        Promise.all([Users.find({roles: 'user'}), Users.findOne({ _id: decodeToken })])
             .then(([userList, data]) => {
                 if (data) {
                     req.data = data
                     // console.log(userList)
                     return res.render('admin/userManage',
                         {
-                            data: mongooseToObject(data),
+                            user: mongooseToObject(data),
                             userList: multipleMongooseToObject(userList),
                             layout: 'adminLayout'
                         })
@@ -92,37 +93,22 @@ class AdminController {
     };
 
 
+//////
     ban(req, res, next) {
-        
-        // var token = req.cookies.token;
-        // var decodeToken = jwt.verify(token, secret)
-        // Promise.all([Users.find({}), Users.findOne({ _id: decodeToken }),   Users.updateOne({_id: req.params.id},{$set: {banCheck: true}})])
-        //     .then(([userList, data, ban]) => {
-        //         if (data) {
-        //             req.data = data
-        //             // console.log(userList)
-        //             return res.render('admin/userManage',
-        //                 {
-        //                     data: mongooseToObject(data),
-        //                     userList: multipleMongooseToObject(userList),
-        //                     layout: 'adminLayout'
-        //                 })
-                 
-        //         }
-        //     }
-        //     )
-        //     .catch(next)
-
         Users.updateOne({_id: req.params.id},{$set: {banCheck: true}})
         .then(()=> {
             res.redirect('back')
         })
     }
-
     unBan(req, res, next) {
-       
-
         Users.updateOne({_id: req.params.id},{$set: {banCheck: false}})
+        .then(()=> {
+            res.redirect('back')
+        })
+    }
+
+    verify(req, res, next) {
+        Users.updateOne({_id: req.params.id},{$set: {permission: "Verified"}})
         .then(()=> {
             res.redirect('back')
         })

@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 body {
   font-family: "Lato", sans-serif; }
 
@@ -100,22 +101,19 @@ header.masthead {
   color: aqua; }
 
 header.masthead h1, header.masthead .h1 {
-  font-size: 2.25rem; }
+  font-size: 70px;
+  font-family: "Comic Sans MS"; }
+
+header.masthead p, header.masthead .p {
+  font-size: 30px;
+  font-family: "Comic Sans MS"; }
 
 @media (min-width: 992px) {
   header.masthead {
     height: 100vh;
     min-height: 40rem;
     padding-top: 4.5rem;
-    padding-bottom: 0; }
-  header.masthead p {
-    font-size: 1.15rem; }
-  header.masthead h1, header.masthead .h1 {
-    font-size: 3rem; } }
-
-@media (min-width: 1200px) {
-  header.masthead h1, header.masthead .h1 {
-    font-size: 3.5rem; } }
+    padding-bottom: 0; } }
 
 #mainNav {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -166,3 +164,320 @@ header.masthead h1, header.masthead .h1 {
     color: #212529; }
   #mainNav.navbar-shrink .navbar-nav .nav-item .nav-link:hover {
     color: #f4623a; } }
+
+footer {
+  font-family: Open Sans; }
+
+section {
+  width: 100%;
+  display: inline-block;
+  background: #333;
+  height: 50vh;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700; }
+
+.footer-distributed {
+  background: black;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: bold 16px sans-serif;
+  padding: 55px 50px; }
+
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right {
+  display: inline-block;
+  vertical-align: top; }
+
+/* Footer left */
+.footer-distributed .footer-left {
+  width: 40%; }
+
+.footer-distributed .footer-left a {
+  cursor: pointer; }
+
+/* The company logo */
+.footer-distributed h3 {
+  color: #ffffff;
+  font: normal 4rem 'Playlist', cursive;
+  margin: 0;
+  color: white; }
+
+.footer-distributed h3 span {
+  color: #d00109; }
+
+/* Footer links */
+.footer-distributed .footer-links {
+  color: #ffffff;
+  margin: 20px 0 12px;
+  padding: 0; }
+
+.footer-distributed .footer-links a {
+  display: inline-block;
+  line-height: 1.8;
+  font-weight: 400;
+  color: inherit; }
+
+.footer-distributed .footer-links a:hover {
+  text-decoration: underline; }
+
+.footer-distributed .footer-company-name {
+  color: #696868;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0; }
+
+/* Footer Center */
+.footer-distributed .footer-center {
+  width: 35%; }
+
+.footer-distributed .footer-center ion-icon {
+  background-color: #000000;
+  color: #d00109;
+  font-size: 25px;
+  width: 28px;
+  height: 28px;
+  border-radius: 0%;
+  text-align: center;
+  line-height: 42px;
+  margin: 10px 15px;
+  vertical-align: middle; }
+
+.footer-distributed .footer-center ico-icon {
+  font-size: 17px;
+  line-height: 38px; }
+
+.footer-distributed .footer-center p {
+  display: inline-block;
+  color: #ffffff;
+  font-weight: 400;
+  vertical-align: middle;
+  margin: 0; }
+
+.footer-distributed .footer-center p span {
+  display: block;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 2; }
+
+.footer-distributed .footer-center p a {
+  color: lightgrey; }
+
+.footer-distributed .footer-center p a:hover {
+  text-decoration: underline; }
+
+.footer-distributed .footer-links a:before {
+  content: "|";
+  font-weight: 300;
+  font-size: 20px;
+  left: 0;
+  color: #fff;
+  display: inline-block;
+  padding-right: 5px; }
+
+.footer-distributed .footer-links .link-1:before {
+  content: none; }
+
+/* Footer Right */
+.footer-distributed .footer-right {
+  width: 20%; }
+
+.footer-distributed .footer-company-about {
+  line-height: 20px;
+  color: #92999f;
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0; }
+
+.footer-distributed .footer-company-about span {
+  display: block;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px; }
+
+.footer-distributed .footer-icons {
+  margin-top: 25px; }
+
+.footer-distributed .footer-icons .social-icons {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  background-color: #92999f;
+  border-radius: 50%;
+  font-size: 25px;
+  text-align: center;
+  line-height: 35px;
+  margin-right: 3px;
+  margin-bottom: 5px; }
+
+.footer-distributed .footer-icons .fa-facebook {
+  color: #4267B2; }
+
+.footer-distributed .footer-icons .fa-twitter {
+  color: #38A1F2; }
+
+.footer-distributed .footer-icons .fa-instagram {
+  color: transparent;
+  background: -webkit-radial-gradient(30% 107%, circle, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background: -o-radial-gradient(30% 107%, circle, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  background-clip: text;
+  -webkit-background-clip: text; }
+
+.footer-distributed .footer-icons .fa-tiktok {
+  color: black; }
+
+.footer-distributed .footer-icons .social-icons i:hover {
+  color: #d00109; }
+
+/* If you don't want the footer to be responsive, remove these media queries */
+@media (max-width: 880px) {
+  .footer-distributed {
+    font: bold 14px sans-serif; }
+  .footer-distributed .footer-left,
+  .footer-distributed .footer-center,
+  .footer-distributed .footer-right {
+    display: block;
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center; }
+  .footer-distributed .footer-center {
+    text-align: left; }
+  .footer-distributed .footer-center i {
+    margin-left: 0; } }
+
+#logo-header {
+  font-family: 'Playlist';
+  font-size: 40px; }
+
+#logo-header span {
+  color: #d00109;
+  font-family: 'Playlist';
+  font-size: 40px; }
+
+a, b, th, td {
+  color: inherit;
+  text-decoration: none; }
+
+a:hover {
+  color: inherit; }
+
+:root {
+  --clr1: #ddd;
+  --clr2: #efefef;
+  --clr3: #333;
+  --clr4: rgb(100,4,3);
+  --border-radius: 7px;
+  --text-radius: 50em;
+  --maincolor: @maincolor; }
+
+body {
+  background: var(--clr1);
+  padding: 0px 0 0 0; }
+
+body *, body :after, body :before {
+  box-sizing: border-box; }
+
+.transparent {
+  background: transparent !important; }
+
+.wrap {
+  max-width: 960px;
+  min-width: 360px;
+  margin: 0 auto;
+  position: relative; }
+
+.wrap.sticky {
+  margin-top: 150px;
+  /* set height from header */ }
+
+.fluid .wrap {
+  max-width: 100% !important; }
+
+header {
+  background: var(--clr2);
+  padding: 30px;
+  width: 100%;
+  border-radius: var(--border-radius);
+  position: relative;
+  z-index: 99; }
+
+.wrap.sticky header {
+  background: var(--clr2);
+  padding: 50px;
+  position: fixed;
+  top: 0px;
+  max-width: 960px;
+  width: calc(100% - 20px);
+  min-width: 360px;
+  border-radius: 0px 0px var(--border-radius) var(--border-radius); }
+
+.fluid .wrap.sticky header {
+  max-width: 100% !important; }
+
+header .logo {
+  background: var(--clr1);
+  width: 50px;
+  height: 50px;
+  border-radius: var(--text-radius); }
+
+header nav {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50px, -50%); }
+
+header nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+header nav ul li {
+  display: inline-block;
+  list-style: none;
+  padding: 15px;
+  margin: 10px;
+  font-size: 20px; }
+
+header nav ul li:hover {
+  font-size: 22px;
+  text-decoration: underline;
+  font-style: bold;
+  color: #d00109;
+  cursor: pointer; }
+
+.main-header .icon {
+  display: none;
+  font-size: 30px; }
+
+@media screen and (max-width: 1000px) {
+  .responsive nav {
+    background: var(--clr2);
+    padding: 0px;
+    width: 100%;
+    border-radius: var(--border-radius);
+    position: relative;
+    z-index: 99; }
+  .main-header .active {
+    padding: 500px 0 0 0; }
+  .main-header a:not(.logo-icon-header) {
+    display: none; }
+  .main-header a.icon {
+    float: right;
+    display: block; }
+  .main-header.responsive {
+    position: relative; }
+  .main-header.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0; }
+  .main-header.responsive a {
+    float: none;
+    display: block;
+    text-align: left; } }

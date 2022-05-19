@@ -32,7 +32,7 @@ router.use('/changePassword',siteController.changePassword)
 
 //logout
 router.post('/logout',siteController.logout)
-router.use('/', siteController.index)
+router.use('/',isLoggined, siteController.index)
 
 
 

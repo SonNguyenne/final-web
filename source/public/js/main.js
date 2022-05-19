@@ -15,10 +15,9 @@ function login() {
         if (data.success) {
             // console.log(data)
             setCookie('token', data.token, 1);
-            window.location.href = "/admin"
+            window.location.href = "/"
         } else {
-            // console.log(data)
-
+            alert(data.msg)
             window.location.href = "/login"
         }
 

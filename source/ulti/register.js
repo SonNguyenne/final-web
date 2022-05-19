@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const multer= require('multer')
+const multer = require('multer')
 const fs = require('fs')
 
 
@@ -26,18 +26,19 @@ function makePassword() {
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-    var dir = "./uploads";
-    if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir);   
-    }
-    cb(null, dir);
+        var dir = "./uploads";
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+        }
+        cb(null, dir);
     },
     filename: function (req, file, cb) {
-      cb(null,file.originalname);
+        cb(null, Date.now() + "--" + file.originalname);
+
     },
-  });
-   
+});
+
 var upload = multer({ storage: storage }).fields([{ name: 'cmndfront', maxCount: 1 }, { name: 'cmndback', maxCount: 8 }])
 
-module.exports = {makePassword,checkUserExist,upload}
+module.exports = { makePassword, checkUserExist, upload }
 
