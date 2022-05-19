@@ -1,6 +1,7 @@
 
 var cookieParser = require('cookie-parser')
 const Users = require('../models/user')
+const { mongooseToObject } = require('../ulti/mongoose')
 
 //auth
 
@@ -32,7 +33,6 @@ function isLoggined(req, res, next) {
         })
     } catch (error) {
         console.log(error)
-
         return res.redirect('/login')
     }
 }

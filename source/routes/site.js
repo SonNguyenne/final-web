@@ -24,7 +24,17 @@ router.post('/login',siteController.validation)
 router.post('/changePassword',siteController.changePasswordSuccess)
 router.use('/changePassword',siteController.changePassword)
 
+// // FORGOT_PASSWORD
+// router.post('/forgotPassword',siteController.reqForgotPassword)
+// router.use('/forgotPassword',siteController.forgotPassword)
+// router.use('/OTP',siteController.oTP)
+
+
+//logout
 router.post('/logout',siteController.logout)
 router.use('/', siteController.index)
+
+
+
 
 module.exports = router;

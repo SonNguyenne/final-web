@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 
 
 
-//tao tai khoan admin
+// tao tai khoan admin
 // bcrypt.hash('123456', 2, function (err, hash) {
 //     const user = new User({
 //         roles: 'admin',
@@ -17,7 +17,7 @@ const jwt = require('jsonwebtoken');
 //         password: hash,
 
 //     })
-//     console.log("1")
+
 //     user.save(() => {
 
 //     });
@@ -110,7 +110,7 @@ class SiteController {
                         msg: 'Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản'
                     })
                 } else {
-                    User.updateOne({ username: username }, { $set: { countFailed: failed + 1 } }, (err, status) => {
+                    User.updateOne({ username: username }, { $set: { countFailed: failed + 1, banCheck : true } }, (err, status) => {
                         if (err) {
                             console.log(err)
                         }
@@ -182,7 +182,8 @@ class SiteController {
                             cmndback: req.files.cmndback['0'].path,
                             countlogin: 0,
                             countFailed: 0,
-                            status: 'waitConfirm'
+                            status: 'waitConfirm',
+                            banCheck: false,
                         })
                         user.save((error, userResult) => {
                             if (error) {
@@ -264,9 +265,6 @@ class SiteController {
         } else {
         bcrypt.hash(newPassword, 10, function (error, hash) {
             if (error) {
-                console.log(newPassword)
-                console.log(error)
-
                 return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
             }
             User.updateOne({ username: username }, { $set: { password: hash, countlogin: 1 } }, (err, status) => {
@@ -280,9 +278,12 @@ class SiteController {
         });
     }}
 
+    
+
 }
 
 module.exports = new SiteController;
 
 const res = require('express/lib/response');
-const siteController = require('./SiteController');
+const siteController = require('./SiteController');const { render } = require('express/lib/response');
+

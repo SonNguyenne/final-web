@@ -13,11 +13,11 @@ function login() {
     }
     ).then(data => {
         if (data.success) {
-            console.log(data)
+            // console.log(data)
             setCookie('token', data.token, 1);
             window.location.href = "/admin"
         } else {
-            console.log(data)
+            // console.log(data)
 
             window.location.href = "/login"
         }
@@ -88,7 +88,7 @@ function changePassword(username) {
                 alert(data)
                 window.location.href = "/login"
             } else {
-                alert(data)
+                alert(data.msg)
             }
 
         }).catch(err => {
@@ -96,3 +96,33 @@ function changePassword(username) {
         })
     }
 }
+
+//=====================Change Password End=================
+
+//==============================Forgot Password =============================
+
+// function forgotPassword() {
+
+//     const username = $('#username').val();
+//     const email = $('#email').val();
+//         $.ajax({
+//             url: '/changePassword',
+//             type: 'post',
+//             data: { 
+//                 username: username,
+//                 email: email
+//             }
+//         }
+//         ).then(data => {
+//             if (data.success) {
+//                 alert(data)
+//                 window.location.href = "/login"
+//             } else {
+//                 alert(data)
+//             }
+
+//         }).catch(err => {
+//             console.log(err)
+//         })
+    
+// }

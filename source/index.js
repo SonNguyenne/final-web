@@ -17,7 +17,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 var cookieParser = require('cookie-parser')
 
 const hbs = exphbs.create({  
-//   helpers:require('./ulti/helpers'),
+  helpers:require('./ulti/helpers'),
   extname: '.hbs'
 })
 

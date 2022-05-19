@@ -23,6 +23,7 @@ function makePassword() {
     }
     return result
 }
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
     var dir = "./uploads";
