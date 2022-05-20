@@ -2,9 +2,11 @@ const express = require('express')
 const router = express.Router()
 
 // Login all page
-const {isLoggined} = require('../ulti/login')
+const { isLoggined,isAdmin,isVerify } = require('../ulti/login')
 var cookieParser = require('cookie-parser')
 router.use(cookieParser())
+
+
 
 //model
 const Users = require('../models/user')
@@ -15,21 +17,21 @@ router.use('/error', adminController.error);
 
 router.use('/wallet-manage', adminController.walletManage);
 
-router.use('/user-manage', adminController.userManage)
+router.use('/user-manage',adminController.userManage)
 
 router.use('/transaction-manage', adminController.transactionManage)
 
 
 //ban unban user
-router.get('/ban/:id',adminController.ban)
+router.get('/ban/:id', adminController.ban)
 
 router.get('/unBan/:id',adminController.unBan)
 
 
 //verify user
-router.get('/verify/:id',adminController.verify)
+router.get('/verify/:id', adminController.verify)
 
-router.use('/', isLoggined,adminController.index)
+router.use('/', isLoggined,isAdmin, adminController.index)
 
 
 

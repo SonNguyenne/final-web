@@ -12,7 +12,7 @@ var secret = 'secretpasstoken'
 function isLoggined(req, res, next) {
     console.log('isLoggined')
     try {
-        console.log(req.cookies)
+        
         var token = req.cookies.token;
         var decodeToken = jwt.verify(token, secret)
         Users.findOne({
@@ -20,7 +20,6 @@ function isLoggined(req, res, next) {
         }).then(data => {
             if (data) {
                 req.data = data
-                console.log(data)
                 if (data.countlogin === '0') {
                     return res.render('changePassword',
                      { username: data.username,
@@ -37,4 +36,35 @@ function isLoggined(req, res, next) {
     }
 }
 
-module.exports = {isLoggined}
+// Check isAdmin
+function isAdmin(req, res, next) {
+    if (req.data.roles !== 'admin') {
+        Users.findOne({ name: req.data.name })
+        .then(user => {
+            res.render('partials/error', {
+                title: 'Error',
+                layout: null,
+                roleNofitication: 'This is Admin page.You are not allowed!',
+            })
+
+        })
+    }
+    next()
+}
+
+// Check Verify
+function isVerify(req,res,next){
+    if(req.data.permission !== 'Verify'){
+        Users.findOne({name: req.data.name})
+            .then (user =>{
+            res.render('partials/error', {
+                title: 'Error',
+                layout: null,
+                roleNofitication: 'Tính năng này chỉ dành cho các tài khoản đã được xác minh',
+            })
+        })
+    }
+    next()
+}
+
+module.exports = {isLoggined,isAdmin,isVerify}

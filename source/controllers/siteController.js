@@ -40,6 +40,7 @@ class SiteController {
 
 
             if (!user) {
+                
                 return res.render('login', {
                     success: false,
                     msg: `Sai tài khoản hoặc mật khẩu`
@@ -297,8 +298,55 @@ class SiteController {
         }
     }
 
+    resetPassword(req, res, next) {
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+        User.findOne({
+            _id: decodeToken
+        }).then(data => {
+            if (data) {
+                req.data = data
+                console.log(data)
+                return res.render('resetPassword',
+                    {
+                        user: mongooseToObject(data),
+                        layout: 'nopartials'
+                    })
+                next()
+            }
 
+            // res.render('admin', {
+            //     title: 'Admin',
+            //     layout: 'adminLayout',
+            //     usernameExample: 'username-example',
+            // })
+        }
+        )
+    }
 
+    resetPasswordSuccess(req, res, next) {
+        console.log('vao day roi1223`')
+        const username = req.body.username
+        const newPassword = req.body.newPassword
+        const confirmPassword = req.body.confirmPassword
+        if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
+            alert("khong trung`")
+        } else {
+            bcrypt.hash(newPassword, 10, function (error, hash) {
+                if (error) {
+                    return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
+                }
+                User.updateOne({ username: username }, { $set: { password: hash, countlogin: 1 } }, (err, status) => {
+                    if (err) {
+                        console.log(err)
+                        return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại 1' })
+                    }
+                    console.log('vao day roi`')
+                    return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
+                })
+            });
+        }
+    }
 }
 
 module.exports = new SiteController;

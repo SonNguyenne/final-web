@@ -98,6 +98,40 @@ function changePassword(username) {
 
 //=====================Change Password End=================
 
+//=====================Change Password afterLogin 2 =================
+function changePassword2(username) {
+    
+    console.log(username)
+    const newPassword = $('#newPassword').val();
+    const confirmPassword = $('#confirmPassword').val();
+    if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
+        alert("Your passwords not match!!! Please enter again!")
+    } else {
+        $.ajax({
+            url: '/resetPassword',
+            type: 'post',
+            data: { 
+                username: username,
+                newPassword: newPassword
+            }
+        }
+        ).then(data => {
+            if (data.success) {
+                alert(data)
+                window.location.href = "/login"
+            } else {
+                
+            }
+
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+}
+
+//=====================Change Password 2 End=================
+
+
 //==============================Forgot Password =============================
 
 // function forgotPassword() {

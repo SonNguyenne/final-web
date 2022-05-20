@@ -4,7 +4,7 @@ const router = express.Router();
 const siteController = require('../controllers/siteController');
 
 // Login all page
-const {isLoggined} = require('../ulti/login')
+const {isLoggined,isAdmin,isVerify} = require('../ulti/login')
 var cookieParser = require('cookie-parser')
 router.use(cookieParser())
 
@@ -23,6 +23,12 @@ router.post('/login',siteController.validation)
 
 router.post('/changePassword',siteController.changePasswordSuccess)
 router.use('/changePassword',siteController.changePassword)
+
+
+// Change Password after login
+router.get('/resetPassword',isLoggined,siteController.resetPassword)
+router.post('/resetPassword',isLoggined,siteController.resetPasswordSuccess)
+
 
 // // FORGOT_PASSWORD
 // router.post('/forgotPassword',siteController.reqForgotPassword)
