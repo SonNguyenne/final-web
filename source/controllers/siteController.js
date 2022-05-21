@@ -329,28 +329,59 @@ class SiteController {
         const username = req.body.username
         const newPassword = req.body.newPassword
         const confirmPassword = req.body.confirmPassword
-        if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
-            alert("khong trung`")
-        } else {
-            bcrypt.hash(newPassword, 10, function (error, hash) {
-                if (error) {
-                    return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
+        const oldPassword = req.body.oldPassword
+
+
+        User.findOne({username: username})
+        .then(user => {
+            bcrypt.compare(oldPassword, user.password, function (err,result) {
+                if(result) {
+                    if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
+                            alert("khong trung`")
+                        } else {
+                            bcrypt.hash(newPassword, 10, function (error, hash) {
+                                if (error) {
+                                    return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
+                                }
+                                User.updateOne({ username: username }, { $set: { password: hash, countlogin: 1 } }, (err, status) => {
+                                    if (err) {
+                                        console.log(err)
+                                        return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại 1' })
+                                    }
+                                    console.log('vao day roi`')
+                                    return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
+                                })
+                            });
+                        }
+                }else{
+                    return res.json('sai password cu~')
                 }
-                User.updateOne({ username: username }, { $set: { password: hash, countlogin: 1 } }, (err, status) => {
-                    if (err) {
-                        console.log(err)
-                        return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại 1' })
-                    }
-                    console.log('vao day roi`')
-                    return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
-                })
-            });
-        }
-    }
+            })
+        })
+
+        // if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
+        //     alert("khong trung`")
+        // } else {
+        //     bcrypt.hash(newPassword, 10, function (error, hash) {
+        //         if (error) {
+        //             return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại' })
+        //         }
+        //         User.updateOne({ username: username }, { $set: { password: hash, countlogin: 1 } }, (err, status) => {
+        //             if (err) {
+        //                 console.log(err)
+        //                 return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại 1' })
+        //             }
+        //             console.log('vao day roi`')
+        //             return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
+        //         })
+        //     });
+        // }
+    }   
 }
 
 module.exports = new SiteController;
 
 const res = require('express/lib/response');
 const siteController = require('./SiteController'); const { render } = require('express/lib/response');
+const { bulkSave } = require('../models/user');
 

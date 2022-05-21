@@ -21,6 +21,9 @@ const User = new mongoose.Schema({
     countFailed: { type: Number, },
     permission: { type: String, default: "Not Verified", },
     banCheck: {type : Boolean, default: false},
+    //wallet
+    userCreditId: {type: mongoose.Schema.Types.ObjectId, ref: 'credit'},
+    money: { type:Number, default:0}
     
 },{timestamps : true});
 

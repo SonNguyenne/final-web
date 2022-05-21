@@ -17,7 +17,7 @@ function login() {
             setCookie('token', data.token, 1);
             window.location.href = "/"
         } else {
-            alert(data.msg)
+            alert(data)
             window.location.href = "/login"
         }
 
@@ -102,6 +102,7 @@ function changePassword(username) {
 function changePassword2(username) {
     
     console.log(username)
+    const oldPassword = $('#oldPassword').val();
     const newPassword = $('#newPassword').val();
     const confirmPassword = $('#confirmPassword').val();
     if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
@@ -112,15 +113,17 @@ function changePassword2(username) {
             type: 'post',
             data: { 
                 username: username,
-                newPassword: newPassword
+               
+                newPassword: newPassword,
+                oldPassword: oldPassword
             }
         }
         ).then(data => {
             if (data.success) {
                 alert(data)
-                window.location.href = "/login"
+                window.location.href = "/"
             } else {
-                
+                alert(data)
             }
 
         }).catch(err => {
