@@ -57,7 +57,7 @@ class CustomerController {
     };
 
     chargeSuccess(req, res, next) {
-        Users.findOneAndUpdate({username: req.body.username}, {$inc: {money: req.body.money}})
+        Users.findOneAndUpdate({username: req.body.username}, {$inc: {money: req.body.money}, $push: {history: req.body}})
         .then(()=> {
             return res.render('customer/charge',{
                 title: 'Charge Success',

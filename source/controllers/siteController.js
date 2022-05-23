@@ -37,8 +37,6 @@ class SiteController {
             if (err) {
                 return console.log(err)
             }
-
-
             if (!user) {
                 return res.json('Sai tài khoản hoặc mật khẩu')
             }
@@ -238,7 +236,7 @@ class SiteController {
     };
 
     logout(req, res) {
-        req.session = null
+        res.clearCookies('token')
         res.json({ logout: true })
     }
 
@@ -354,7 +352,52 @@ class SiteController {
         //         })
         //     });
         // }
-    }   
+    }
+    
+    
+    //[GET] forgotPassword
+    forgotPassword(req,res){
+        res.render('forgotPassword', {
+                title: 'Admin',
+                layout: 'nopartials',
+            })
+    }
+
+    forgotPasswordSuccess(req,res){
+        let temp = makePassword()
+        bcrypt.hash(temp, 10, function (err, hash) {
+            User.findOneAndUpdate({email:req.body.email}, {$set:{password:hash}})
+            .then(()=>{
+                var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: "ts29032001@gmail.com",
+                        pass: "123456son"
+                    }
+                });
+
+                var mailOptions = {
+                    from: process.env.GMAIL,
+                    to: req.body.email,
+                    subject: 'Final-web - This is your new Password',
+                    text: `information about this:
+                        password: ${temp}
+                    `
+                };
+
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+
+                    }
+                });
+            })
+        });
+    }
+    
+
 }
 
 module.exports = new SiteController;

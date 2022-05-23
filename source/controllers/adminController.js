@@ -91,13 +91,13 @@ class AdminController {
 
 //////
     ban(req, res, next) {
-        Users.updateOne({_id: req.params.id},{$set: {banCheck: true}})
+        Users.updateOne({_id: req.params.id},{$set: {banCheck: true, countFailed: 6}})
         .then(()=> {
             res.redirect('back')
         })
     }
     unBan(req, res, next) {
-        Users.updateOne({_id: req.params.id},{$set: {banCheck: false}})
+        Users.updateOne({_id: req.params.id},{$set: {banCheck: false, countFailed: 0}})
         .then(()=> {
             res.redirect('back')
         })

@@ -31,9 +31,9 @@ router.post('/resetPassword',isLoggined,siteController.resetPasswordSuccess)
 
 
 // // FORGOT_PASSWORD
-// router.post('/forgotPassword',siteController.reqForgotPassword)
-// router.use('/forgotPassword',siteController.forgotPassword)
-// router.use('/OTP',siteController.oTP)
+router.get('/forgotPassword',siteController.forgotPassword)
+router.post('/forgotPassword',siteController.forgotPasswordSuccess)
+
 
 
 //logout
