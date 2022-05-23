@@ -40,29 +40,18 @@ class SiteController {
 
 
             if (!user) {
-                
-                return res.render('login', {
-                    success: false,
-                    msg: `Sai tài khoản hoặc mật khẩu`
-                })
+                return res.json('Sai tài khoản hoặc mật khẩu')
             }
 
             //kiểm tra nếu count = 10 thì là đang khoá tạm thời
             if (user.countFailed == 10) {
-                return res.render('login', {
-                    success: false,
-                    msg: `Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút`
-                })
+                return res.json(`Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút`)
             }
 
             //kiểm tra nếu count = 10 thì là đang khoá tạm thời
             if (user.countFailed == 6) {
-                return res.render('login', {
-                    success: false,
-                    msg: `Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản`
-                })
+                return res.json(`Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản`)
             }
-            console.log('check')
             bcrypt.compare(password, user.password, function (err, result) {
                 if (result) {
                     // tao token cho account
@@ -97,30 +86,21 @@ class SiteController {
                         })
                         console.log(`unlock ${username} !`)
                     }, 60000);
-                    return res.render('login', {
-                        success: false,
-                        msg: `Tài khoản đã bị khoá trong 1 phút! Nếu bạn tiếp tục nhập sai thêm 3 lần nữa sẽ bị khoá vĩnh viễn!`
-                    })
+                    return res.json(`Tài khoản đã bị khoá trong 1 phút! Nếu bạn tiếp tục nhập sai thêm 3 lần nữa sẽ bị khoá vĩnh viễn!`)
                 } else if (failed >= 5) {
                     User.updateOne({ username: username }, { $set: { countFailed: 6 } }, (err, status) => {
                         if (err) {
                             console.log(err)
                         }
                     })
-                    return res.render('login', {
-                        success: false,
-                        msg: 'Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản'
-                    })
+                    return res.json('Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản')
                 } else {
                     User.updateOne({ username: username }, { $set: { countFailed: failed + 1, banCheck: true } }, (err, status) => {
                         if (err) {
                             console.log(err)
                         }
                     })
-                    return res.render('login', {
-                        success: false,
-                        msg: `Bạn đã nhập sai mật khẩu ${failed + 1} lần!!!`
-                    })
+                    return res.json(`Bạn đã nhập sai mật khẩu ${failed + 1} lần!!!`)
                 }
             });
         })
@@ -136,7 +116,6 @@ class SiteController {
         }).then(data => {
             if (data) {
                 req.data = data
-                console.log(data)
                 return res.render('index',
                     {
                         user: mongooseToObject(data),
@@ -325,7 +304,6 @@ class SiteController {
     }
 
     resetPasswordSuccess(req, res, next) {
-        console.log('vao day roi1223`')
         const username = req.body.username
         const newPassword = req.body.newPassword
         const confirmPassword = req.body.confirmPassword

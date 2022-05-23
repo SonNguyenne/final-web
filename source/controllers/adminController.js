@@ -1,6 +1,8 @@
 const Users = require('../models/user')
 const { multipleMongooseToObject } = require('../ulti/mongoose')
 const { mongooseToObject } = require('../ulti/mongoose')
+
+//jwt token direct all pages
 const jwt = require('jsonwebtoken');
 var secret = 'secretpasstoken'
 
@@ -23,12 +25,6 @@ class AdminController {
                     })
                 next()
             }
-
-            // res.render('admin', {
-            //     title: 'Admin',
-            //     layout: 'adminLayout',
-            //     usernameExample: 'username-example',
-            // })
         }
         )
     }
