@@ -20,9 +20,8 @@
                                     <th>Phone</th>
                                     <th>FrontId</th>
                                     <th>BackId</th>
-                                    <th>WalletId</th>
-                                    <th>Time</th>
-                                    
+                                    <th>Created At</th>
+
                                     <th>Permission</th>
                                     <th>Action</th>
                                 </tr>
@@ -34,10 +33,7 @@
                                     <td>{{this.phone}}</td>
                                     <td><i class="fa fa-image"></td>
                                     <td><i class="fa fa-image"></td>
-                                    <td>Wallet01</td>
                                     <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
-
-                                    
 
                                     <td class="text-danger font-weight-bold">
                                         <div class="d-flex justify-content-between">
@@ -45,11 +41,7 @@
                                             <a href="/admin/verify/{{this._id}}"><button class="btn btn-success">
                                                     <i class="fa fa-check"></i></button></a>
                                         </div>
-                                        
-
                                     </td>
-
-
                                     {{#ifeq this.banCheck true }}
                                     <td>
                                         <a href="/admin/unBan/{{this._id}}"><button
@@ -67,6 +59,258 @@
 
                             </tbody>
                         </table>
+
+                        <div class="container my-4">
+                            <div class="nav-align-top mb-4">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
+                                            data-bs-target="#navs-top-all" aria-controls="navs-top-all"
+                                            aria-selected="true">
+                                            Waiting Verify
+                                        </button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                            data-bs-target="#navs-top-selling" aria-controls="navs-top-selling"
+                                            aria-selected="false">
+                                            Verified
+                                        </button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                            data-bs-target="#navs-top-soldout" aria-controls="navs-top-soldout"
+                                            aria-selected="false">
+                                            Banned
+                                        </button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                            data-bs-target="#navs-top-waiting" aria-controls="navs-top-waiting"
+                                            aria-selected="false">
+                                            Chờ duyệt
+                                        </button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                            data-bs-target="#navs-top-deleted" aria-controls="navs-top-deleted"
+                                            aria-selected="false">
+                                            Đã xoá
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+
+                                    <div class="tab-pane fade show active" id="navs-top-all" role="tabpanel">
+                                        <div class="card">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Email</th>
+                                                            <th>Phone</th>
+                                                            <th>FrontId</th>
+                                                            <th>BackId</th>
+                                                            <th>Created At</th>
+                                                            <th>Permission</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-border-bottom-0">
+                                                        {{#each userList}}
+                                                        {{#ifeq this.permission "Not Verified"}}
+                                                        <tr>
+                                                            <td>
+                                                                {{this.email}}</i>
+                                                            </td>
+                                                            <td>{{this.phone}}</td>
+
+                                                            <td> <img src="../../{{this.cmndfront}}"></td>
+                                                            <td>
+                                                                <img src="../{{this.cmndback}}">
+                                                            </td>
+                                                            <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex justify-content-between">
+                                                                    {{this.permission}}
+                                                                    <a href="/admin/verify/{{this._id}}"><button
+                                                                            class="btn btn-success">
+                                                                            <i class="fa fa-check"></i></button></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {{/ifeq}}
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade " id="navs-top-selling" role="tabpanel">
+
+
+                                        <div class="table-responsive text-nowrap">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>FrontId</th>
+                                                        <th>BackId</th>
+                                                        <th>Created At</th>
+                                                        <th>Permission</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-border-bottom-0">
+                                                    {{#each userList}}
+                                                    {{#ifeq this.permission "Verified"}}
+                                                    <tr>
+                                                        <td>
+                                                            {{this.email}}</i>
+                                                        </td>
+                                                        <td>{{this.phone}}</td>
+
+                                                        <td> <img src="../../{{this.cmndfront}}"></td>
+                                                        <td>
+                                                            <img src="../{{this.cmndback}}">
+                                                        </td>
+                                                        <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex justify-content-between">
+                                                                {{this.permission}}
+                                                                <a href="/admin/verify/{{this._id}}"><button
+                                                                        class="btn btn-success">
+                                                                        <i class="fa fa-check"></i></button></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    {{/ifeq}}
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade  " id="navs-top-soldout" role="tabpanel">
+
+
+                                        <div class="table-responsive text-nowrap">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>FrontId</th>
+                                                        <th>BackId</th>
+                                                        <th>Created At</th>
+                                                        <th>Permission</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-border-bottom-0">
+                                                    {{#each userList}}
+                                                    {{#ifeq this.banCheck true}}
+                                                    <tr>
+                                                        <td>
+                                                            {{this.email}}</i>
+                                                        </td>
+                                                        <td>{{this.phone}}</td>
+
+                                                        <td> <img src="../../{{this.cmndfront}}"></td>
+                                                        <td>
+                                                            <img src="../{{this.cmndback}}">
+                                                        </td>
+                                                        <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}
+                                                        </td>
+                                                        {{#ifeq this.banCheck true }}
+                                                        <td>
+                                                            <a href="/admin/unBan/{{this._id}}"><button
+                                                                    class="btn btn-success">UnBan</button></a>
+                                                        </td>
+                                                        {{/ifeq}}
+                                                    </tr>
+                                                    {{/ifeq}}
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade  " id="navs-top-waiting" role="tabpanel">
+
+
+                                        <div class="table-responsive text-nowrap">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tên sản phẩm</th>
+                                                        <th>Giá</th>
+                                                        <th>Thương hiệu</th>
+                                                        <th>Thể loại</th>
+                                                        <th>Kho hàng</th>
+                                                        <th>Trạng thái</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-border-bottom-0">
+
+                                                    <tr>
+                                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                                            <strong>SOKOLOV 106.30.00.001.06.01.2 – NỮ – KÍNH
+                                                                SAPPHIRE</strong>
+                                                        </td>
+                                                        <td>11.530.000<u>đ</u></td>
+                                                        <td>
+                                                            SOKOLOV
+                                                        </td>
+                                                        <td>Đồng hồ cao cấp</td>
+                                                        <td>12</td>
+                                                        <td><span class="badge bg-label-warning me-1">Chờ
+                                                                duyệt</span>
+                                                        </td>
+                                                    </tr>
+
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade " id="navs-top-deleted" role="tabpanel">
+
+
+                                        <div class="table-responsive text-nowrap">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tên sản phẩm</th>
+                                                        <th>Giá</th>
+                                                        <th>Thương hiệu</th>
+                                                        <th>Thể loại</th>
+                                                        <th>Kho hàng</th>
+                                                        <th>Trạng thái</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-border-bottom-0">
+
+                                                    <tr>
+                                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                                            <strong>SEIKO SSB351P1 – NAM</strong>
+                                                        </td>
+                                                        <td>6.375.000 <u>đ</u></td>
+                                                        <td>SEIKO</td>
+                                                        <td>Đồng hồ cao cấp</td>
+                                                        <td>0</td>
+                                                        <td><span class="badge bg-label-danger me-1">Đã xoá</span>
+                                                        </td>
+                                                    </tr>
+
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

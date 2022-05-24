@@ -26,10 +26,10 @@ function makePassword() {
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        var dir = "./uploads";
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
-        }
+        var dir = "./source/public/uploads/";
+        // if (!fs.existsSync(dir)) {
+        //     fs.mkdirSync(dir);
+        // }
         cb(null, dir);
     },
     filename: function (req, file, cb) {

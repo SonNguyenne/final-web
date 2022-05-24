@@ -13,8 +13,8 @@ const User = new mongoose.Schema({
     birthday: { type: String, },
     address: { type: String, },
     frontId: { type: String, },
-    cmndfront: { type: String, },
-    cmndback: { type: String, },
+    cmndfront: {data: Buffer, type: String, },
+    cmndback: { data: Buffer, type: String, },
     countlogin: { type: String, },
     //1. waitConfirm 2. confirmed 3.waitUpdate 4. bannedMany
     countFailed: { type: Number, },

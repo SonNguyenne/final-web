@@ -175,8 +175,8 @@ class SiteController {
                             fullname: req.body.fullname,
                             address: req.body.address,
                             birthday: req.body.birthday,
-                            cmndfront: req.files.cmndfront['0'].path,
-                            cmndback: req.files.cmndback['0'].path,
+                            cmndfront: req.files.cmndfront['0'].path.replace(/\\/g, "/"),
+                            cmndback: req.files.cmndback['0'].path.replace(/\\/g, "/"),
                             countlogin: 0,
                             countFailed: 0,
                             banCheck: false,
@@ -236,8 +236,8 @@ class SiteController {
     };
 
     logout(req, res) {
-        res.clearCookies('token')
-        res.json({ logout: true })
+        res.clearCookie('token')
+        return res.json('dang xaut thanh cong')
     }
 
 

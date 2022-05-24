@@ -19,11 +19,11 @@ function isLoggined(req, res, next) {
         }).then(data => {
             if (data) {
                 req.data = data
-                // if (data.countlogin === '0') {
-                //     return res.render('changePassword',
-                //      { username: data.username,
-                //         layout: 'nopartials' })
-                // }
+                if (data.countlogin === '0') {
+                    return res.render('changePassword',
+                     { username: data.username,
+                        layout: 'nopartials' })
+                }
                 next()
             }
         }).catch(err => {
