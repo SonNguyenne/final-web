@@ -1,5 +1,5 @@
 
-$maincolor: rgb(208,1,9);
+$maincolor: rgb(121, 121, 121);
 
 // ================ LOGIN =============================
 body {
@@ -140,12 +140,12 @@ body {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("https://i.ytimg.com/vi/YSMykzHYLhw/maxresdefault.jpg");
+  background: linear-gradient(to bottom, rgba(103, 97, 94, 0.8) 0%, rgba(116, 116, 116, 0.8) 100%), url("https://i.ytimg.com/vi/LEQV1Z5KKY0/maxresdefault.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  color: aqua;
+  color: rgb(255, 255, 255);
   
 }
 header.masthead h1, header.masthead .h1 {

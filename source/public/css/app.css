@@ -93,12 +93,12 @@ body {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("https://i.ytimg.com/vi/YSMykzHYLhw/maxresdefault.jpg");
+  background: linear-gradient(to bottom, rgba(103, 97, 94, 0.8) 0%, rgba(116, 116, 116, 0.8) 100%), url("https://i.ytimg.com/vi/LEQV1Z5KKY0/maxresdefault.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  color: aqua; }
+  color: white; }
 
 header.masthead h1, header.masthead .h1 {
   font-size: 70px;
@@ -207,7 +207,7 @@ section {
   color: white; }
 
 .footer-distributed h3 span {
-  color: #d00109; }
+  color: #797979; }
 
 /* Footer links */
 .footer-distributed .footer-links {
@@ -236,7 +236,7 @@ section {
 
 .footer-distributed .footer-center ion-icon {
   background-color: #000000;
-  color: #d00109;
+  color: #797979;
   font-size: 25px;
   width: 28px;
   height: 28px;
@@ -334,7 +334,7 @@ section {
   color: black; }
 
 .footer-distributed .footer-icons .social-icons i:hover {
-  color: #d00109; }
+  color: #797979; }
 
 /* If you don't want the footer to be responsive, remove these media queries */
 @media (max-width: 880px) {
@@ -357,7 +357,7 @@ section {
   font-size: 40px; }
 
 #logo-header span {
-  color: #d00109;
+  color: #797979;
   font-family: 'Playlist';
   font-size: 40px; }
 
@@ -449,7 +449,7 @@ header nav ul li:hover {
   font-size: 22px;
   text-decoration: underline;
   font-style: bold;
-  color: #d00109;
+  color: #797979;
   cursor: pointer; }
 
 .main-header .icon {

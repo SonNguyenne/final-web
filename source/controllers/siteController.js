@@ -153,10 +153,7 @@ class SiteController {
             }).then(data => {
                 console.log(data);
                 if (data != null) {
-                    return res.render('register', {
-                        success: false,
-                        msg: `Sdt da ton tai`
-                    })
+                    return res.json( `Số điện thoại hoặc Email đã tồn tại`)
                 } else {
                     let username = Math.random() * (9999999999 - 1000000000) + 1000000000;
                     while (checkUserExist(username)) {
@@ -237,7 +234,7 @@ class SiteController {
 
     logout(req, res) {
         res.clearCookie('token')
-        return res.json('dang xaut thanh cong')
+        return res.json('Đăng xuất thành công')
     }
 
 
@@ -286,8 +283,7 @@ class SiteController {
                 console.log(data)
                 return res.render('resetPassword',
                     {
-                        user: mongooseToObject(data),
-                        layout: 'nopartials'
+                        user: mongooseToObject(data)
                     })
                 next()
             }
@@ -313,7 +309,7 @@ class SiteController {
             bcrypt.compare(oldPassword, user.password, function (err,result) {
                 if(result) {
                     if (newPassword != confirmPassword && (newPassword != null && confirmPassword != null)) {
-                            alert("khong trung`")
+                            return res.json('Mật khẩu không trùng nhau')
                         } else {
                             bcrypt.hash(newPassword, 10, function (error, hash) {
                                 if (error) {
@@ -324,13 +320,12 @@ class SiteController {
                                         console.log(err)
                                         return res.json({ username: username, success: false, msg: 'Đổi mật khẩu thất bại 1' })
                                     }
-                                    console.log('vao day roi`')
                                     return res.json({ username: username, success: true, msg: 'Đổi mật khẩu thành công' })
                                 })
                             });
                         }
                 }else{
-                    return res.json('sai password cu~')
+                    return res.json('Mật khẩu cũ không đúng')
                 }
             })
         })

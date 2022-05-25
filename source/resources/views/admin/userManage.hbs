@@ -35,22 +35,40 @@
                                     <td><i class="fa fa-image"></td>
                                     <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
 
-                                    <td class="text-danger font-weight-bold">
-                                        <div class="d-flex justify-content-between">
+                                    <td class="font-weight-bold">
+
+                                        {{#ifeq this.permission "Verified"}}
+                                            <div class="text-success d-flex justify-content-between">
                                             {{this.permission}}
-                                            <a href="/admin/verify/{{this._id}}"><button class="btn btn-success">
-                                                    <i class="fa fa-check"></i></button></a>
-                                        </div>
+                                        {{else}}
+                                            <div class=" text-danger d-flexx justify-content-between">
+                                            {{this.permission}}
+                                                
+                                        {{/ifeq}}
+                                            </div>
                                     </td>
                                     {{#ifeq this.banCheck true }}
                                     <td>
                                         <a href="/admin/unBan/{{this._id}}"><button
                                                 class="btn btn-success">UnBan</button></a>
+                                                {{#ifeq this.permission "Not Verified"}}
+                                        <a href="/admin/verify/{{this._id}}"><button class="btn btn-success">
+                                                Verify</i></button></a>
+                                                {{/ifeq}}
+                                        <a href="/customer/{{this.slug}}"><button class="btn btn-dark">
+                                                Details</i></button></a>
+
                                     </td>
                                     {{else}}
                                     <td>
                                         <a href="/admin/ban/{{this._id}}"><button
                                                 class="btn btn-danger">Ban</button></a>
+                                                 {{#ifeq this.permission "Not Verified"}}
+                                        <a href="/admin/verify/{{this._id}}"><button class="btn btn-success">
+                                                Verify</i></button></a>
+                                                {{/ifeq}}
+                                        <a href="/customer/{{this.slug}}"><button class="btn btn-dark">
+                                                Details</i></button></a>
                                     </td>
                                     {{/ifeq}}
                                 </tr>
