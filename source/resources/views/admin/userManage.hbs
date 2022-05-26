@@ -31,8 +31,8 @@
                                 <tr>
                                     <td>{{this.email}} </td>
                                     <td>{{this.phone}}</td>
-                                    <td><i class="fa fa-image"></td>
-                                    <td><i class="fa fa-image"></td>
+                                    <td> <img class="card-img" src="../../{{this.cmndfront}}"></td>
+                                    <td> <img  class="card-img" src="../../{{this.cmndback}}"></td>
                                     <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
 
                                     <td class="font-weight-bold">
@@ -142,9 +142,9 @@
                                                             </td>
                                                             <td>{{this.phone}}</td>
 
-                                                            <td> <img class="card-img-top" src="../../{{this.cmndfront}}"></td>
+                                                            <td> <img class="card-img" src="../../{{this.cmndfront}}"></td>
                                                             <td>
-                                                                <img  class="card-img-top" src="../../{{this.cmndback}}">
+                                                                <img  class="card-img" src="../../{{this.cmndback}}">
                                                             </td>
                                                             <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}
                                                             </td>
@@ -188,9 +188,9 @@
                                                         </td>
                                                         <td>{{this.phone}}</td>
 
-                                                        <td> <img src="../../{{this.cmndfront}}"></td>
+                                                        <td> <img  class="card-img" src="../../{{this.cmndfront}}"></td>
                                                         <td>
-                                                            <img src="../{{this.cmndback}}">
+                                                            <img  class="card-img" src="../{{this.cmndback}}">
                                                         </td>
                                                         <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}
                                                         </td>
@@ -220,12 +220,12 @@
                                                         <th>Phone</th>
                                                         <th>FrontId</th>
                                                         <th>BackId</th>
-                                                        <th>Created At</th>
+                                                        <th>Ban At</th>
                                                         <th>Permission</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="table-border-bottom-0">
-                                                    {{#each userList}}
+                                                    {{#each userListBanned}}
                                                     {{#ifeq this.banCheck true}}
                                                     <tr>
                                                         <td>
@@ -233,11 +233,11 @@
                                                         </td>
                                                         <td>{{this.phone}}</td>
 
-                                                        <td> <img src="../../{{this.cmndfront}}"></td>
+                                                        <td> <img   class="card-img" src="../../{{this.cmndfront}}"></td>
                                                         <td>
-                                                            <img src="../{{this.cmndback}}">
+                                                            <img  class="card-img" src="../{{this.cmndback}}">
                                                         </td>
-                                                        <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}
+                                                        <td>{{moment this.updatedAt format = "HH:mm on DD/MM/yyyy"}}
                                                         </td>
                                                         {{#ifeq this.banCheck true }}
                                                         <td>
@@ -252,80 +252,8 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade  " id="navs-top-waiting" role="tabpanel">
-
-
-                                        <div class="table-responsive text-nowrap">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Giá</th>
-                                                        <th>Thương hiệu</th>
-                                                        <th>Thể loại</th>
-                                                        <th>Kho hàng</th>
-                                                        <th>Trạng thái</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="table-border-bottom-0">
-
-                                                    <tr>
-                                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                                            <strong>SOKOLOV 106.30.00.001.06.01.2 – NỮ – KÍNH
-                                                                SAPPHIRE</strong>
-                                                        </td>
-                                                        <td>11.530.000<u>đ</u></td>
-                                                        <td>
-                                                            SOKOLOV
-                                                        </td>
-                                                        <td>Đồng hồ cao cấp</td>
-                                                        <td>12</td>
-                                                        <td><span class="badge bg-label-warning me-1">Chờ
-                                                                duyệt</span>
-                                                        </td>
-                                                    </tr>
-
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade " id="navs-top-deleted" role="tabpanel">
-
-
-                                        <div class="table-responsive text-nowrap">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Giá</th>
-                                                        <th>Thương hiệu</th>
-                                                        <th>Thể loại</th>
-                                                        <th>Kho hàng</th>
-                                                        <th>Trạng thái</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="table-border-bottom-0">
-
-                                                    <tr>
-                                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                                            <strong>SEIKO SSB351P1 – NAM</strong>
-                                                        </td>
-                                                        <td>6.375.000 <u>đ</u></td>
-                                                        <td>SEIKO</td>
-                                                        <td>Đồng hồ cao cấp</td>
-                                                        <td>0</td>
-                                                        <td><span class="badge bg-label-danger me-1">Đã xoá</span>
-                                                        </td>
-                                                    </tr>
-
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                
+                                
                                 </div>
                             </div>
                         </div>

@@ -34,6 +34,7 @@ const User = new mongoose.Schema({
         receiver: { type: String, },
         type: { type: String},
         money: { type: Number},
+        note: { type: String, },
         status: { type: String, }
     },{timestamps : true}]
 

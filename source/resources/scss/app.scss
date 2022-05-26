@@ -70,12 +70,7 @@ body {
 }
 
 // ================ End LOGIN =============================
-// ================img user manage======= 
-.card-img-top {
-  width: 100%;
-  height: 30vh;
-  object-fit: contain; }
-  
+
 
 // ================ REGISTER =============================
 
@@ -635,3 +630,12 @@ header nav {
       text-align: left;
     }
   }
+
+
+  // ================img user manage======= 
+.card-img-top {
+  max-height: 10pc;
+  width: 50%;
+  height: 10pc;
+  object-fit: contain; 
+}

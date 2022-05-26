@@ -49,8 +49,9 @@ class AdminController {
         var decodeToken = jwt.verify(token, secret)
 
 
-        Promise.all([Users.find({roles: 'user'}), Users.findOne({ _id: decodeToken })])
-            .then(([userList, data]) => {
+        Promise.all([Users.find({roles: 'user'}).sort({"createdAt":-1}), Users.findOne({ _id: decodeToken }),
+                    Users.find({roles: 'user'}).sort({"updatedAt":-1})])
+            .then(([userList, data,userListBanned]) => {
                 if (data) {
                     req.data = data
                     // console.log(userList)
@@ -58,6 +59,8 @@ class AdminController {
                         {
                             user: mongooseToObject(data),
                             userList: multipleMongooseToObject(userList),
+                            userListBanned: multipleMongooseToObject(userListBanned),
+
                             layout: 'adminLayout'
                         })
                  
@@ -65,27 +68,6 @@ class AdminController {
             }
             )
             .catch(next)
-
-
-        //         Users.findOne({
-        //             _id: decodeToken
-        //         }).then(data => {
-        //             if (data) {
-        //                 req.data = data
-        //                 console.log(data)
-        //                     return res.render('admin/userManage',
-        //                      {  user: mongooseToObject(data),
-        //                         layout: 'adminLayout' })
-        //                 next()
-        //             }
-
-        //        // res.render('admin/userManage', {
-        //         //     title: 'User',
-        //         //     layout: 'adminLayout',
-        //         // })
-        //     }
-        // )
-
     };
 
 

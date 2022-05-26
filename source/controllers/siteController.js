@@ -10,19 +10,20 @@ var secret = 'secretpasstoken'
 
 
 
-// tao tai khoan admin
-// bcrypt.hash('123456', 2, function (err, hash) {
-//     const user = new User({
-//         roles: 'admin',
-//         username: 'admin',
-//         password: hash,
+    // tao tai khoan admin
+    // bcrypt.hash('123456', 2, function (err, hash) {
+    //     const user = new User({
+    //         roles: 'admin',
+    //         username: 'admin',
+    //         password: hash,
+    //         permission : 'Verified'
 
-//     })
+    //     })
 
-//     user.save(() => {
+    //     user.save(() => {
 
-//     });
-// });
+    //     });
+    // });
 
 
 class SiteController {
@@ -91,7 +92,7 @@ class SiteController {
                             console.log(err)
                         }
                     })
-                    return res.json('Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản')
+                    return res.json('Tài khoản đã bị vô vô hiệu hóa! Liên hệ admin để mở lại tài khoản')
                 } else {
                     User.updateOne({ username: username }, { $set: { countFailed: failed + 1, banCheck: true } }, (err, status) => {
                         if (err) {
@@ -120,12 +121,6 @@ class SiteController {
                     })
                 next()
             }
-
-            // res.render('admin', {
-            //     title: 'Admin',
-            //     layout: 'adminLayout',
-            //     usernameExample: 'username-example',
-            // })
         }
         )
     };
@@ -161,7 +156,6 @@ class SiteController {
                     username = parseInt(username)
                     //Tạo password ngẫu nhiên
                     let temp = makePassword()
-                    console.log(req.files.cmndfront)
                     bcrypt.hash(temp, 10, function (err, hash) {
                         const user = new User({
                             roles: 'user',

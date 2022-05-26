@@ -18,11 +18,20 @@ router.use('/banking', customerController.banking);
 
 router.use('/history', customerController.history);
 
+// nap tien
+
 router.use('/charge', customerController.charge);
 
 router.post('/charge-success', customerController.chargeSuccess);
 
+//rut tien
 
+router.use('/withdraw', customerController.withdraw);
+
+router.post('/withdraw-success', customerController.withdrawSuccess);
+
+//edit
+router.post('/edit-cmnd', customerController.edit);
 
 
 // [link bien dong] /show || /user/:slug

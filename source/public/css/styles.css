@@ -445,6 +445,17 @@ legend + * {
   direction: ltr;
 }
 */
+
+/*cmnd  */
+.card-img {
+
+  width: 50%;
+  height: 5pc;
+  object-fit: contain; 
+}
+
+
+
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }

@@ -85,7 +85,6 @@ function changePassword(username) {
         }
         ).then(data => {
             if (data.success) {
-                alert(data)
                 window.location.href = "/login"
             } else {
                 alert(data.msg)
@@ -175,16 +174,9 @@ function creditIdCheck() {
     console.log(expiredDate)
     console.log(cvvId)
     console.log(money)
-    // if(creditId == 111111 ) alert('Chi chuyen dc 1tr')
-    // 111111 && 10/10 && 411
-    // 222222 11/11  443
-    // 333333 12/12 577
-    // ((creditId == 222222) && (expiredDate == '11/11/2022') && (cvvId == 443))
-    // ((creditId == 333333) && (expiredDate == '12/12/2022') && (cvvId == 577)) 
-
     if ((creditId == 111111) && (expiredDate == '10/10/2022') && (cvvId == 411)) {
         var chargeForm = document.forms['charge-form']
-        alert('Nap tien thanh cong')
+        alert('Nạp tiền thành công')
         // setTimeout(3000)
         chargeForm.action = '/customer/charge-success'
         chargeForm.onsubmit();
@@ -193,28 +185,58 @@ function creditIdCheck() {
     }
     else if ((creditId == 222222) && (expiredDate == '11/11/2022') && (cvvId == 443)) {
         if (money >= 1000000) {
-            alert('1 trieu 1 lan')
+            alert('Mỗi lần chỉ được nạp 1 triệu')
         } else {
             var chargeForm = document.forms['charge-form']
-            alert('Nap tien thanh cong')
+            alert('Nạp tiền thành công')
             chargeForm.action = '/customer/charge-success'
             chargeForm.onsubmit();
         }
 
     } else if ((creditId == 333333) && (expiredDate == '12/12/2022') && (cvvId == 577)) {
-        alert('het han')
+        alert('Thẻ hết hạn sử dụng, vui lòng dùng thẻ khác')
 
     } else if ((creditId != 111111) || (creditId != '10/10/2022') || (creditId != 411) ||
         (creditId != 222222) || (expiredDate != '11/11/2022') || (cvvId != 443)
             (creditId != 333333) || (expiredDate != '12/12/2022') || (cvvId != 577)
     ) {
-        alert('sai thong tin the')
+        alert('Sai thông tin thẻ')
     }
     else {
-        alert('the nay khong dc ho tro')
+        alert('Thẻ này không được hỗ trợ')
 
     }
 
 
 }
+
+//============================== Withdraw Money =============================
+function withdrawIdCheck(){
+    const wCreditId = document.getElementById("withdrawCreditId").value;
+    const wExpiredDate = document.getElementById("withdrawExpiredDate").value;
+    const wCvvId = document.getElementById("withdrawCvvId").value;
+    const wMoney = document.getElementById("withdrawMoney").value;
+    console.log(wCreditId)
+    console.log(wExpiredDate)
+    console.log(wCvvId)
+    console.log(wMoney)
+    if ((wCreditId == 111111) && (wExpiredDate == '10/10/2022') && (wCvvId == 411)) {
+        if(wMoney >= 5000000){
+        var withdrawForm = document.forms['withdraw-form']
+        alert('so tien qua lon cho xac nhan')
+            
+        withdrawForm.action = '/customer/withdraw-success'
+        withdrawForm.onsubmit();
+        }else
+        var withdrawForm = document.forms['withdraw-form']
+        alert('rut tien thanh thanhcong')
+        // setTimeout(3000)
+        withdrawForm.action = '/customer/withdraw-success'
+        withdrawForm.onsubmit();
+    }else{
+        alert('Sai thông tin thẻ')
+        
+    }
+}
+
 
