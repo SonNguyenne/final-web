@@ -6,7 +6,12 @@
                 <hr class="divider" />
             </div>
             <div class="col-lg-8 align-self-baseline">
+
+                {{#ifeq user.permission "Not Verified"}}
+                <p class=" mb-5"Vui lòng chờ admin xác nhận tài khoản để sử dụng các chất năng</p>
+                {{else}}
                 <p class=" mb-5">Hi {{user.fullname}}</p>
+                {{/ifeq}}
                 <a class="btn btn-light btn-xl" href="/customer">Thông tin cá nhân</a>
             </div>
         </div>

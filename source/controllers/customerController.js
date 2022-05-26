@@ -27,6 +27,26 @@ class CustomerController {
         )
     };
 
+    detail(req, res, next) {
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+        Promise.all([Users.findOne({slug: req.params.slug}), Users.findOne({ _id: decodeToken })])
+            .then(([userDetail, data]) => {
+                if (data) {
+                    req.data = data
+                    // console.log(userDetail)
+                    return res.render('customer/detail',
+                        {
+                            user: mongooseToObject(data),
+                            userDetail: mongooseToObject(userDetail)
+                        })
+                 
+                }
+            }
+            )
+            .catch(next)
+    };
+
 
     banking(req, res, next) {
         res.render('customer/banking', {

@@ -25,9 +25,9 @@ router.post('/charge-success', customerController.chargeSuccess);
 
 
 
+// [link bien dong] /show || /user/:slug
+router.use('/:slug', customerController.detail)
 
-
-// router.user('/customer', customerController.customer);
 
 router.use('/',isLoggined,customerController.index)
 

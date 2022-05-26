@@ -151,9 +151,8 @@ class SiteController {
                     { phone: req.body.phone }
                 ]
             }).then(data => {
-                console.log(data);
                 if (data != null) {
-                    return res.json( `Số điện thoại hoặc Email đã tồn tại`)
+                    res.json(`Số điện thoại hoặc Email đã tồn tại`)
                 } else {
                     let username = Math.random() * (9999999999 - 1000000000) + 1000000000;
                     while (checkUserExist(username)) {
@@ -162,6 +161,7 @@ class SiteController {
                     username = parseInt(username)
                     //Tạo password ngẫu nhiên
                     let temp = makePassword()
+                    console.log(req.files.cmndfront)
                     bcrypt.hash(temp, 10, function (err, hash) {
                         const user = new User({
                             roles: 'user',
@@ -172,8 +172,8 @@ class SiteController {
                             fullname: req.body.fullname,
                             address: req.body.address,
                             birthday: req.body.birthday,
-                            cmndfront: req.files.cmndfront['0'].path.replace(/\\/g, "/"),
-                            cmndback: req.files.cmndback['0'].path.replace(/\\/g, "/"),
+                            cmndfront: req.files.cmndfront[0].path.replace(/\\/g, "/").substr(14),
+                            cmndback: req.files.cmndback[0].path.replace(/\\/g, "/").substr(14),
                             countlogin: 0,
                             countFailed: 0,
                             banCheck: false,
