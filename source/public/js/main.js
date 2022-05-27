@@ -218,6 +218,7 @@ function withdrawIdCheck(){
     const wMoney = document.getElementById("money").value;
     const wNote = document.getElementById("note").value;
 
+
     if ((wCreditId == 111111) && (wExpiredDate == '10/10/2022') && (wCvvId == 411)) {
         if(wMoney % 50000 == 0){
         var withdrawForm = document.forms['withdraw-form']
@@ -233,4 +234,8 @@ function withdrawIdCheck(){
     }
 }
 
+function getMoney(){
+    const wMoney = document.getElementById("money").value;
+    document.getElementById("fee").innerHTML = wMoney*0.05;
+}
 

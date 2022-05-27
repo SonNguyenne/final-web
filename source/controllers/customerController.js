@@ -120,8 +120,9 @@ class CustomerController {
         if (user.countWithdraw >= 2) {
             return res.json('1 ngày chỉ được rút tiền 2 lần')
         }else{
-        var phantram = req.body.money + (req.body.money * 0.05)
-        Users.updateOne({username: req.body.username}, {$inc: {money: -req.body.money}, $push: {history: req.body}}, (err, status)=>{
+        var phantram = req.body.money*105/100
+        console.log(phantram)
+        Users.updateOne({username: req.body.username}, {$inc: {money: -phantram}, $push: {history: req.body}}, (err, status)=>{
             if(err){
                 console.log(err)
             }
