@@ -43,15 +43,15 @@ class AdminController {
         })
     };
 
-    
+
     userManage(req, res, next) {
         var token = req.cookies.token;
         var decodeToken = jwt.verify(token, secret)
 
 
-        Promise.all([Users.find({roles: 'user'}).sort({"createdAt":-1}), Users.findOne({ _id: decodeToken }),
-                    Users.find({roles: 'user'}).sort({"updatedAt":-1})])
-            .then(([userList, data,userListBanned]) => {
+        Promise.all([Users.find({ roles: 'user' }).sort({ "createdAt": -1 }), Users.findOne({ _id: decodeToken }),
+        Users.find({ roles: 'user' }).sort({ "updatedAt": -1 })])
+            .then(([userList, data, userListBanned]) => {
                 if (data) {
                     req.data = data
                     // console.log(userList)
@@ -63,7 +63,7 @@ class AdminController {
 
                             layout: 'adminLayout'
                         })
-                 
+
                 }
             }
             )
@@ -71,33 +71,56 @@ class AdminController {
     };
 
 
-//////
+    ////// Manage Users
     ban(req, res, next) {
-        Users.updateOne({_id: req.params.id},{$set: {banCheck: true, countFailed: 6}})
-        .then(()=> {
-            res.redirect('back')
-        })
+        Users.updateOne({ _id: req.params.id }, { $set: { banCheck: true, countFailed: 6 } })
+            .then(() => {
+                res.redirect('back')
+            })
     }
     unBan(req, res, next) {
-        Users.updateOne({_id: req.params.id},{$set: {banCheck: false, countFailed: 0}})
-        .then(()=> {
-            res.redirect('back')
-        })
+        Users.updateOne({ _id: req.params.id }, { $set: { banCheck: false, countFailed: 0 } })
+            .then(() => {
+                res.redirect('back')
+            })
     }
 
     verify(req, res, next) {
-        Users.updateOne({_id: req.params.id},{$set: {permission: "Verified"}})
-        .then(()=> {
-            res.redirect('back')
-        })
+        Users.updateOne({ _id: req.params.id }, { $set: { permission: "Verified" } })
+            .then(() => {
+                res.redirect('back')
+            })
     }
 
-
+    /////
     transactionManage(req, res, next) {
         res.render('admin/transactionManage', {
             title: 'Transaction',
             layout: 'adminLayout',
         })
+    };
+
+    withdrawManage(req, res, next) {
+
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+
+
+        Promise.all([Users.find({ roles: 'user' }), Users.findOne({ _id: decodeToken }), Users.findOne({ history: decodeToken})])
+            .then(([userList, data]) => {
+                if (data) {
+                    req.data = data
+                    // console.log(userList)
+                    return res.render('admin/withdrawManage',
+                        {
+                            user: mongooseToObject(data),
+                            userList: multipleMongooseToObject(userList),
+                            layout: 'adminLayout'
+                        })
+                    }      
+                }   
+            )
+        .catch(next)
     };
 }
 

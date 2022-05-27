@@ -30,6 +30,9 @@ router.use('/withdraw', customerController.withdraw);
 
 router.post('/withdraw-success', customerController.withdrawSuccess);
 
+router.post('/:id/confirm-withdraw', customerController.edit);
+
+
 //edit
 router.post('/edit-cmnd', customerController.edit);
 

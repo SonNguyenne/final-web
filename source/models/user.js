@@ -24,6 +24,9 @@ const User = new mongoose.Schema({
     countFailed: { type: Number, },
     permission: { type: String, default: "Not Verified", },
     banCheck: {type : Boolean, default: false},
+
+    //count rut tien
+    countWithdraw: {type: Number},
     //wallet
     money: { type:Number, default:0},
     //slug
@@ -35,7 +38,8 @@ const User = new mongoose.Schema({
         type: { type: String},
         money: { type: Number},
         note: { type: String, },
-        status: { type: String, }
+        status: { type: String, },
+        createdAt: {type: Date , default: Date.now()},
     },{timestamps : true}]
 
 

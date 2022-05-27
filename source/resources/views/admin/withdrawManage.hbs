@@ -16,30 +16,31 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Sender</th>
-                                <th>Receiver</th>
-                                <th>Country</th>
-                                <th>Age</th>
-                                <th>Created date</th>
-                                <th>Money</th>
+                                <th>Username</th>
+                                <th>Time</th>
+                                <th>Withdraw</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                        
                         <tbody>
-                            
+
+                            {{#each userList}}
+
+                            {{#each this.history}}
+
                             <tr>
-                                <td>Gavin Joyce</td>
-                                <td>Developer</td>
-                                <td>Edinburgh</td>
-                                <td>42</td>
-                                <td>2010/12/22</td>
-                                <td class="text-danger font-weight-bold">$92,575</td>
+                                <td>{{this.this.username}}</td>
+                                <td>{{moment this.this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
+                                
+                                <td>{{this.this.money}}</td>
                                 <td>
                                     <button class="btn-xs btn-success">Accept</button>
                                     <button class="btn-xs btn-danger">Decline</button>
                                 </td>
                             </tr>
+                            {{/each}}
+                            {{/each}}
                         </tbody>
                     </table>
                     </div>

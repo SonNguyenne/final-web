@@ -80,11 +80,8 @@ class CustomerController {
     chargeSuccess(req, res, next) {
         Users.findOneAndUpdate({username: req.body.username}, {$inc: {money: req.body.money}, $push: {history: req.body}})
         .then(()=> {
-            return res.render('customer/charge',{
-                title: 'Charge Success',
-                layout: 'main',
-                chargeMsg: ' Nap tien thanh cong'
-            })
+            return res.redirect('back')
+
         })
         .catch(err => {
             console.log(err)
@@ -116,28 +113,60 @@ class CustomerController {
     };
 
     withdrawSuccess(req, res, next) {
-        console.log('ok')
-        Users.findOneAndUpdate({username: req.body.username}, {$inc: {money: req.body.money}, $push: {history: req.body}})
-        .then(()=> {
-            return res.render('customer/withdraw',{
-                title: 'Charge Success',
-                layout: 'main'
+        Users.findOne({username:req.body.username},(err,user)=>{
+        if (err) {
+            return console.log(err)
+        }
+        if (user.countWithdraw >= 2) {
+            return res.json('1 ngày chỉ được rút tiền 2 lần')
+        }else{
+        var phantram = req.body.money + (req.body.money * 0.05)
+        Users.updateOne({username: req.body.username}, {$inc: {money: -req.body.money}, $push: {history: req.body}}, (err, status)=>{
+            if(err){
+                console.log(err)
+            }
+        })
+        Users.updateOne({username: req.body.username}, {$set:{countWithdraw:user.countWithdraw +1}}, (err, status)=>{
+            if(err){
+                console.log(err)
+            }
+            return res.redirect('back')
+        })
+        var setWithdraw =setTimeout(function () {
+            Users.updateOne({ username: req.body.username }, { $set: { countWithdraw: 0 } }, (err, status) => {
+                if (err) {
+                    console.log(err)
+                }
             })
-        })
-        .catch(err => {
-            console.log(err)
-        })
-        
+            console.log('reset counwithdraw')
+        },10000 );
+        }
+     })
     };
 
 
 
 
     history(req, res, next) {
-        res.render('customer/history', {
-            title: 'History',
-            layout: 'main',
-        })
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+
+
+        Promise.all([Users.find({ roles: 'user' }), Users.findOne({ _id: decodeToken }), Users.findOne({ history: decodeToken})])
+            .then(([userList, data]) => {
+                if (data) {
+                    req.data = data
+                    // console.log(userList)
+                    return res.render('customer/history',
+                        {
+                            user: mongooseToObject(data),
+                            userList: multipleMongooseToObject(userList),
+                            layout: 'main'
+                        })
+                    }      
+                }   
+            )
+        .catch(next)
     };
 
 

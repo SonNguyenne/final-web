@@ -1,1 +1,49 @@
-<h1>This is history page of customer</h1>
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">{{title}} Tables</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="/customer/{{user.slug}}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Tables</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    User Database
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Time</th>
+                                <th>Withdraw</th>
+                                <th>Hoạt Động</th>
+                            </tr>
+                        </thead>
+                       
+                        <tbody>
+
+                            {{#each userList}}
+
+                            {{#each this.history}}
+
+                            <tr>
+                                <td>{{this.this.username}}</td>
+                                <td>{{moment this.this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
+                                
+                                <td>{{this.this.money}}</td>
+                                <td>
+                                    {{this.this.type}}
+                                </td>
+                            </tr>
+                            {{/each}}
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>

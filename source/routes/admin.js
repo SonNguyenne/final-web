@@ -21,6 +21,9 @@ router.use('/user-manage',adminController.userManage)
 
 router.use('/transaction-manage', adminController.transactionManage)
 
+router.use('/withdraw-manage', adminController.withdrawManage)
+
+
 
 //ban unban user
 router.get('/ban/:id', adminController.ban)

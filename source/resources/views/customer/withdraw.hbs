@@ -21,18 +21,22 @@
 
              <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Số tiền cần rút</label>
-                <input type="number" class="form-control" id="withdrawMoney"  name="withdrawMoney" min="1">
+                <input type="number" class="form-control" id="money"  name="money" min="1">
             </div>
             
              <div class="mb-3">
                 <label class="form-label">Ghi chu</label>
-                <textarea type="" class="form-control" id="withdrawNote"  name="withdrawNote" ></textarea>
+                <textarea type="" class="form-control" id="note"  name="note" ></textarea>
             </div>
-            <input name="username" value="{{user.username}}" >
-            <input name="type" value="rutTien" > 
+            <input name="username" value="{{user.username}}" hidden >
+            <input name="type" value="rutTien" hidden > 
 
+
+            <div  style="background-color:rgba(175, 172, 172, 0.1);font-size:14px">
+                <strong>Phí rút tiền là 5% mỗi lần rút</strong> <br>
+            </div>
             <div class="text-center mt-2">
-                <button type="submit" class="btn btn-primary"  onclick="withdrawIdCheck()">Rút tiền</button>
+                <button type="submit" class="btn btn-outline-dark"  onclick="withdrawIdCheck()">Rút tiền</button>
             </div>
             
             </div>

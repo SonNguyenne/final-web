@@ -40,5 +40,8 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).fields([{ name: 'cmndfront', maxCount: 1 }, { name: 'cmndback', maxCount: 8 }])
 
+
+
+
 module.exports = { makePassword, checkUserExist, upload }
 

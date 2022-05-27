@@ -10,10 +10,11 @@
         <a href="#"><li>Chuyển Tiền</li></a>
         <a href="/customer/charge"><li>Nạp tiền</li></a>
         <a href="#"><li>Mua thẻ cào</li></a>
-        <a href="/resetPassword"><li>Đổi Password</li> </a>
+        <a href="/customer/charge"><li>Nạp tiền</li></a>
+        <a href="/customer/history"><li>Lịch sử</li> </a>
         {{/ifeq }}
         {{#ifeq user.roles 'admin'}}
-        <a href="/admin"><li>Admin</li></a>
+        <a href="/admin"><li>Admin</li></a> 
         {{/ifeq }}
         <a onclick="logout()"> <li>Logout</li></a>
         <a href="javascript:void(0);" class="icon logo-icon-header" onclick="openNavResponsive()">

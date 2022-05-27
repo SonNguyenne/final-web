@@ -215,24 +215,18 @@ function withdrawIdCheck(){
     const wCreditId = document.getElementById("withdrawCreditId").value;
     const wExpiredDate = document.getElementById("withdrawExpiredDate").value;
     const wCvvId = document.getElementById("withdrawCvvId").value;
-    const wMoney = document.getElementById("withdrawMoney").value;
-    console.log(wCreditId)
-    console.log(wExpiredDate)
-    console.log(wCvvId)
-    console.log(wMoney)
+    const wMoney = document.getElementById("money").value;
+    const wNote = document.getElementById("note").value;
+
     if ((wCreditId == 111111) && (wExpiredDate == '10/10/2022') && (wCvvId == 411)) {
-        if(wMoney >= 5000000){
+        if(wMoney % 50000 == 0){
         var withdrawForm = document.forms['withdraw-form']
-        alert('so tien qua lon cho xac nhan')
-            
+        alert('Rút tiền thành công')
         withdrawForm.action = '/customer/withdraw-success'
         withdrawForm.onsubmit();
         }else
-        var withdrawForm = document.forms['withdraw-form']
-        alert('rut tien thanh thanhcong')
-        // setTimeout(3000)
-        withdrawForm.action = '/customer/withdraw-success'
-        withdrawForm.onsubmit();
+        alert('Số tiền mỗi lần rút phải là bội số của 50.000')
+        
     }else{
         alert('Sai thông tin thẻ')
         
