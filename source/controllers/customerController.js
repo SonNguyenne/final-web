@@ -17,7 +17,7 @@ class CustomerController {
         }).then(data => {
             if (data) {
                 req.data = data
-                console.log(data)
+                // console.log(data)
                 return res.render('customer',
                     {
                         user: mongooseToObject(data)
@@ -64,7 +64,7 @@ class CustomerController {
         }).then(data => {
             if (data) {
                 req.data = data
-                console.log(data)
+                // console.log(data)
                 return res.render('customer/charge',
                     {
                         user: mongooseToObject(data),
@@ -99,7 +99,7 @@ class CustomerController {
         }).then(data => {
             if (data) {
                 req.data = data
-                console.log(data)
+                // console.log(data)
                 return res.render('customer/withdraw',
                     {
                         user: mongooseToObject(data),
@@ -121,7 +121,6 @@ class CustomerController {
             return res.json('1 ngày chỉ được rút tiền 2 lần')
         }else{
         var phantram = req.body.money*105/100
-        console.log(phantram)
         Users.updateOne({username: req.body.username}, {$inc: {money: -phantram}, $push: {history: req.body}}, (err, status)=>{
             if(err){
                 console.log(err)
@@ -140,7 +139,7 @@ class CustomerController {
                 }
             })
             console.log('reset counwithdraw')
-        },10000 );
+        },86400000 );
         }
      })
     };
@@ -151,9 +150,7 @@ class CustomerController {
     history(req, res, next) {
         var token = req.cookies.token;
         var decodeToken = jwt.verify(token, secret)
-
-
-        Promise.all([Users.find({ roles: 'user' }), Users.findOne({ _id: decodeToken }), Users.findOne({ history: decodeToken})])
+        Promise.all([Users.find({ roles: 'user' }).sort({ "createdAt": -1 }), Users.findOne({ _id: decodeToken })])
             .then(([userList, data]) => {
                 if (data) {
                     req.data = data
@@ -176,8 +173,8 @@ class CustomerController {
         upload(req, res, function (err) {
             var token = req.cookies.token;
             var decodeToken = jwt.verify(token, secret)
-            console.log(decodeToken)
-            console.log(token)
+            // console.log(decodeToken)
+            // console.log(token)
             Users.findOneAndUpdate({
                 _id: decodeToken
             },{$set: { cmndfront: req.files.cmndfront[0].path.replace(/\\/g, "/").substr(14),
@@ -188,6 +185,42 @@ class CustomerController {
 
         })
        
+    }
+
+    buy(req, res, next) {
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+        Users.findOne({
+            _id: decodeToken
+        }).then(data => {
+            if (data) {
+                req.data = data
+                // console.log(data)
+                return res.render('customer/buy',
+                    {
+                        user: mongooseToObject(data),
+                        title: 'Banking',
+                        layout: 'main',
+                    })
+                next()
+            }
+        }
+        )
+    };
+
+    buySuccess(req, res, next){
+        var totalMoney = req.body.money
+        var nhamang = req.body.nhamang
+        Users.updateOne({username: req.body.username}, {$inc: {money: -totalMoney}, $push: {history: req.body}}, (err, status)=>{
+        return res.render('customer/buy',
+            {
+                user: mongooseToObject(data),
+                title: 'Banking',
+                layout: 'main',
+                mathe: req.body.cardnumber,
+                nhamang: nhamang
+            })
+        })
     }
 }
 

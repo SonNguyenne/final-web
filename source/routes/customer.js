@@ -30,8 +30,9 @@ router.use('/withdraw', customerController.withdraw);
 
 router.post('/withdraw-success', customerController.withdrawSuccess);
 
-router.post('/:id/confirm-withdraw', customerController.edit);
-
+//mua the
+router.get('/buy', customerController.buy);
+router.post('/buy-success', customerController.buySuccess);
 
 //edit
 router.post('/edit-cmnd', customerController.edit);

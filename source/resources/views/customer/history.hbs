@@ -20,6 +20,7 @@
                                 <th>Time</th>
                                 <th>Withdraw</th>
                                 <th>Hoạt Động</th>
+                                <th>Mã thẻ điện thoại</th>
                             </tr>
                         </thead>
                        
@@ -36,6 +37,12 @@
                                 <td>{{this.this.money}}</td>
                                 <td>
                                     {{this.this.type}}
+                                </td>
+                                <td>
+
+                                {{#ifeq this.this.type "muaTheDienThoai"}}
+                                    {{this.this.cardnumber}}
+                                {{/ifeq}}
                                 </td>
                             </tr>
                             {{/each}}

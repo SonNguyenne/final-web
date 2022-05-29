@@ -221,13 +221,14 @@ function withdrawIdCheck(){
 
     if ((wCreditId == 111111) && (wExpiredDate == '10/10/2022') && (wCvvId == 411)) {
         if(wMoney % 50000 == 0){
-        var withdrawForm = document.forms['withdraw-form']
-        alert('Rút tiền thành công')
-        withdrawForm.action = '/customer/withdraw-success'
-        withdrawForm.onsubmit();
-        }else
         alert('Số tiền mỗi lần rút phải là bội số của 50.000')
-        
+        }else{
+            var withdrawForm = document.forms['withdraw-form']
+            alert('Rút tiền thành công')
+            withdrawForm.action = '/customer/withdraw-success'
+            withdrawForm.onsubmit();
+            
+        }
     }else{
         alert('Sai thông tin thẻ')
         
@@ -239,3 +240,101 @@ function getMoney(){
     document.getElementById("fee").innerHTML = wMoney*0.05;
 }
 
+//=====================buy the dien thoai===
+$('#get-nhamang-value').on('change', function(){
+    document.getElementById('amount-and-money').removeAttribute('hidden')
+})
+
+$('#get-money-value').on('change', function() {
+    var priceValue = $('#get-money-value').val()
+    $('#amount').on('change', function() { 
+        var amountValue = $('#amount').val()
+        var totalPrice =  priceValue* amountValue
+        document.getElementById('total-money').value = totalPrice
+        $('#total-display').html('<label for="amount" class="form-label">Tổng tiền: <b id="total-display">'+ totalPrice +'</b> VND</label>')
+
+        var userMoney = $('#user-money').text()
+        if(totalPrice > userMoney){
+            document.getElementById('buy-form-btn').innerHTML = 'Không đủ tiền'
+        }
+        else{
+            document.getElementById('buy-form-btn').innerHTML = 'Mua thẻ'
+            document.getElementById('buy-form-btn').removeAttribute('disabled')
+        }
+
+        var nhaMang = document.getElementById('get-nhamang-value').value
+        cardnumber=[]
+        for (let i = 0; i<amountValue; i++){
+            var lastNumberCard = (Math.floor(Math.random() * (99999 - 10000) + 10000))
+            if(nhaMang == 'viettel'){
+                 cardnumber[i] = '11111' + lastNumberCard
+            }
+            else if (nhaMang == 'mobiphone'){
+                 cardnumber[i] = '22222' + lastNumberCard
+            }
+            else if (nhaMang == 'vinaphone'){
+                 cardnumber[i] = '33333' + lastNumberCard
+            }
+            else{
+                cardnumber[i] = '00000' + lastNumberCard
+            }
+            document.getElementById('card-number').value = cardnumber + ','
+        }
+    })
+});
+
+
+$('#amount').on('change', function() { 
+    var amountValue = $('#amount').val()
+    $('#get-money-value').on('change', function() {
+        var priceValue = $('#get-money-value').val()
+        var totalPrice =  priceValue* amountValue
+        document.getElementById('total-money').value = totalPrice
+        $('#total-display').html('<label for="amount" class="form-label">Tổng tiền: <b id="total-display">'+ totalPrice +'</b> VND</label>')
+    
+        var userMoney = $('#user-money').text()
+        if(totalPrice > userMoney){
+            document.getElementById('buy-form-btn').innerHTML = 'Không đủ tiền'
+        }
+        else{
+            document.getElementById('buy-form-btn').innerHTML = 'Mua thẻ'
+            document.getElementById('buy-form-btn').removeAttribute('disabled')
+        }
+
+        var nhaMang = document.getElementById('get-nhamang-value').value
+        cardnumber=[]
+        for (let i = 0; i<amountValue; i++){
+            var lastNumberCard = (Math.floor(Math.random() * (99999 - 10000) + 10000))
+            if(nhaMang == 'viettel'){
+                 cardnumber[i] = '11111' + lastNumberCard
+            }
+            else if (nhaMang == 'mobiphone'){
+                 cardnumber[i] = '22222' + lastNumberCard
+            }
+            else if (nhaMang == 'vinaphone'){
+                 cardnumber[i] = '33333' + lastNumberCard
+            }
+            else{
+                cardnumber[i] = '00000' + lastNumberCard
+            }
+            document.getElementById('card-number').value = cardnumber + ','
+        }
+    })
+});
+
+function formatNumber(num) {
+    var first = num.split(',');
+    var digits = first[0].split('').reverse();
+    var new_digits = [];
+    for(var i =0; i<digits.length; i++) {
+      if((i+1)%3==0) {
+        new_digits.push(digits[i]);
+        new_digits.push('.');
+      }
+      else {
+        new_digits.push(digits[i]);
+      }
+    }
+    var new_num = new_digits.reverse().join("")+','+first[1];
+    return new_num;
+  }

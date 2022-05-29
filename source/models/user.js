@@ -39,6 +39,8 @@ const User = new mongoose.Schema({
         money: { type: Number},
         note: { type: String, },
         status: { type: String, },
+        cardnumber: { type: String},
+        // 1111124683 , 1111124683 ,1111124683,1111124683
         createdAt: {type: Date , default: Date.now()},
     },{timestamps : true}]
 

@@ -1,0 +1,81 @@
+
+{{#if mathe}}
+<div class="container">
+    <div class="m-5 p-3 bg-light border border-4 rounded">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Nhà Mạng</th>
+                    <th>Mã Thẻ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{nhamang}}</td>
+                    <td>{{mathe}}</td>    
+                </tr>          
+            </tbody>
+        </table>
+    </div>
+</div>
+{{/if}}
+<div class="container">
+    <form method="post" action="/customer/buy-success" id="buy-form">
+        <div class="login-form m-5 p-3 bg-light border border-4 rounded">
+            <div class="text-center">
+                    <h1>Mua thẻ điện thoại</h1>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nhà mạng</label>
+                <select class="form-control" name="nhamang" id="get-nhamang-value"required>
+                    <option >Chọn nhà mạng</option>  
+                    <option value="viettel"   id="viettel">Viettel</option>   
+                    <option value="mobiphone" id="mobiphone">Mobiphone</option>   
+                    <option value="vinaphone" id="vinaphone">Vinaphone</option>   
+                </select>
+            </div>
+            <div class="row" id="amount-and-money" hidden>
+                <div class="mb-3 col-6">
+                    <label for="exampleInputEmail1" class="form-label">Mệnh Giá</label>
+                    <select class="form-control" id="get-money-value" required>
+                        <option value="">Chọn giá</option>   
+                        <option value="10000">10,000VND</option>   
+                        <option value="20000">20,000VND</option>   
+                        <option value="50000">50,000VND</option>   
+                        <option value="100000">100,000VND</option>   
+                    </select>
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label for="amount" class="form-label">Số lượng</label>
+                    {{!-- <input type="number" class="form-control" id="amount" required> --}}
+                    <select class="form-control" id="amount" name="amount" required>
+                        <option value="">Chọn số lượng thẻ</option>   
+                        <option value="1">1 thẻ</option>   
+                        <option value="2">2 thẻ</option>   
+                        <option value="3">3 thẻ</option>   
+                        <option value="4">4 thẻ</option>   
+                        <option value="5">5 thẻ</option>  
+                    </select>
+                </div>
+            </div>
+
+
+            <span class="badge badge-pill badge-danger text-dark p-0">Số tiền hiện có: <b id="user-money">{{user.money}}</b> </span>
+
+            {{!-- display money from JS --}}
+            <div id="total-display">
+            </div>
+            <input name="cardnumber" id="card-number" hidden>
+            <input class="form-control" name="money" id="total-money" hidden>
+            <input hidden name="username" value="{{user.username}}">
+            <input hidden name="type" value="muaTheDienThoai"> 
+            <div class="text-center mt-2">
+                <button type="submit" class="btn btn-outline-dark" id="buy-form-btn">Mua thẻ</button>
+            </div>
+            
+            </div>
+        </div>
+    </form>
+</div>
