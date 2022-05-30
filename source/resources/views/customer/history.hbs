@@ -16,36 +16,37 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>STT</th>
                                 <th>Username</th>
                                 <th>Time</th>
                                 <th>Withdraw</th>
                                 <th>Hoạt Động</th>
-                                <th>Mã thẻ điện thoại</th>
+                                <th>Note</th>
                             </tr>
                         </thead>
                        
                         <tbody>
 
-                            {{#each userList}}
+                        
 
-                            {{#each this.history}}
+                            {{#each user.history}}
 
                             <tr>
-                                <td>{{this.this.username}}</td>
-                                <td>{{moment this.this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
+                                <td>{{sum @index 1}}</td>
+                                <td>{{this.username}}</td>
+                                <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
                                 
-                                <td>{{this.this.money}}</td>
+                                <td>{{this.money}}</td>
                                 <td>
-                                    {{this.this.type}}
+                                    {{this.type}}
                                 </td>
                                 <td>
-
-                                {{#ifeq this.this.type "muaTheDienThoai"}}
-                                    {{this.this.cardnumber}}
+                                {{#ifeq this.type "muaTheDienThoai"}}
+                                    {{this.cardnumber}}
                                 {{/ifeq}}
+                                {{this.note}}
                                 </td>
                             </tr>
-                            {{/each}}
                             {{/each}}
                         </tbody>
                     </table>

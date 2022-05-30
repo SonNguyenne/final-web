@@ -1,45 +1,77 @@
-  <div class="sub-header">
-    <nav class="sub-nav">
-        <ul id="sub-nav-left">
-                <li>
-                    <a class="active" href="#">Welcome <b>{{user.fullname}}</b>!</a>
-                    <div class="subnav-dropdown">
-                      <br>
-                      <a class="subnav-dropdown-items" href="/customer/{{user.slug}}"><i class="fa fa-address-card"></i> My Account</a>
-                      <hr>
-                      <a class="subnav-dropdown-items" href="/customer/history"><i class="fa fa-book"></i> Lịch sử</a>
-                      <hr>
-                      <a class="subnav-dropdown-items" href="#"><i class="fa fa-money"  aria-hidden="true"></i> {{user.money}}VND</a>
-                      <hr>
-                      <a class="subnav-dropdown-items" onclick="logout()"><i class='fas fa-sign-out-alt'></i> Log out</a>
-                      <br><br>
-                    </div>
-                </li>
-        </ul>
-    </nav>
+<div class="sub-header">
+  <nav class="sub-nav">
+    <ul id="sub-nav-left">
+      {{#ifeq user.permission 'Verified'}}
+
+      <li>
+        <a class="active" href="#">Welcome <b>{{user.fullname}}</b>!</a>
+        <div class="subnav-dropdown">
+          <br>
+          <a class="subnav-dropdown-items" href="/customer/{{user.slug}}"><i class="fa fa-address-card"></i> My
+            Account</a>
+          <hr>
+          <a class="subnav-dropdown-items" href="/customer/history"><i class="fa fa-book"></i> Lịch sử</a>
+          <hr>
+          <a class="subnav-dropdown-items" href="#"><i class="fas fa-money-bill-alt"></i> {{user.money}}VND</a>
+          <hr>
+          <a class="subnav-dropdown-items" onclick="logout()"><i class='fas fa-sign-out-alt'></i> Log out</a>
+          <br><br>
+        </div>
+      </li>
+      {{/ifeq}}
+      {{#ifeq user.permission 'Not Verified'}}
+
+      <li>
+        <a class="active" href="#">Welcome <b>{{user.fullname}}</b>!</a>
+        <div class="subnav-dropdown">
+          <br>
+          <a class="subnav-dropdown-items" href="/customer/{{user.slug}}"><i class="fa fa-address-card"></i> My
+            Account</a>
+          <hr>
+          <a class="subnav-dropdown-items" href="#"><i class="fas fa-money-bill-alt"></i> {{user.money}}VND</a>
+          <hr>
+          <a class="subnav-dropdown-items" onclick="logout()"><i class='fas fa-sign-out-alt'></i> Log out</a>
+          <br><br>
+        </div>
+      </li>
+      {{/ifeq}}
+    </ul>
+  </nav>
 </div>
-  
-  
-  <header class="main-header" id="main-header">   
-      <a href="/" class="logo-icon-header"><div id="logo-header">Son<span>Handsome</span></div></a>
 
-      
-    <nav>
-      <ul class="">
-        {{!-- more than 6 is not beautiful --}}
-        {{#ifeq user.permission 'Verified'}}
-        <a href="/customer/withdraw"><li>Rút tiền</li></a>
-        <a href="#"><li>Chuyển Tiền</li></a>
-        <a href="/customer/charge"><li>Nạp tiền</li></a>
-        <a href="/customer/buy"><li>Mua thẻ cào</li></a>
-        {{/ifeq }}
-        {{#ifeq user.roles 'admin'}}
-        <a href="/admin"><li>Admin</li></a> 
-        {{/ifeq }}
-        <a href="javascript:void(0);" class="icon logo-icon-header" onclick="openNavResponsive()">
-          <i class="fa fa-bars"></i>
-        </a>
 
-      </ul>
-    </nav>
-  </header>
+<header class="main-header" id="main-header">
+  <a href="/" class="logo-icon-header">
+    <div id="logo-header">Son<span>Handsome</span></div>
+  </a>
+
+
+  <nav>
+    <ul class="">
+      {{!-- more than 6 is not beautiful --}}
+      {{#ifeq user.permission 'Verified'}}
+      <a href="/customer/withdraw">
+        <li>Rút tiền</li>
+      </a>
+      <a href="/customer/transfer">
+        <li>Chuyển Tiền</li>
+      </a>
+      <a href="/customer/charge">
+        <li>Nạp tiền</li>
+      </a>
+      <a href="/customer/buy">
+        <li>Mua thẻ cào</li>
+      </a>
+      {{/ifeq }}
+      {{#ifeq user.roles 'admin'}}
+      <a href="/admin">
+        <li>Admin</li>
+      </a>
+      {{/ifeq }}
+      <a href="javascript:void(0);" class="icon logo-icon-header" onclick="openNavResponsive()">
+        <i class="fa fa-bars"></i>
+      </a>
+
+    </ul>
+  </nav>
+</header>

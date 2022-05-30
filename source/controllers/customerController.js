@@ -2,7 +2,7 @@ const Users = require('../models/user')
 const { multipleMongooseToObject } = require('../ulti/mongoose')
 const { mongooseToObject } = require('../ulti/mongoose')
 const { checkUserExist, makePassword, upload } = require('../ulti/register')
-
+const nodemailer = require('nodemailer');
 //jwt token direct all pages
 const jwt = require('jsonwebtoken');
 var secret = 'secretpasstoken'
@@ -49,11 +49,69 @@ class CustomerController {
     };
 
 
-    banking(req, res, next) {
-        res.render('customer/banking', {
-            title: 'Banking',
-            layout: 'main',
+    transfer(req, res, next) {
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+        Users.findOne({
+            _id: decodeToken
+        }).then(data => {
+            if (data) {
+                req.data = data
+                // console.log(data)
+                return res.render('customer/transfer',
+                    {
+                        user: mongooseToObject(data),
+                        title: 'Banking',
+                        layout: 'main',
+                    })
+                next()
+            }
+        }
+        )
+    };
+
+
+    transferSuccess(req, res, next) { 
+        if(req.body.payer == 'receiver'){
+        var totalMoney = req.body.money - req.body.fee
+        Promise.all([
+            Users.findOne({phone: req.body.phone}),
+            Users.updateOne({phone: req.body.phone}, {$inc: {money: totalMoney}, $push: {history: req.body}}),
+            Users.findOneAndUpdate({username: req.body.username}, {$inc: {money: -req.body.money}, $push: {history: req.body}})
+        ])
+        .then((receiver,sender)=>{
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: "ts29032001@gmail.com",
+                    pass: "123456son"
+                }
+            });
+
+            var mailOptions = {
+                from: process.env.GMAIL,
+                to: receiver.email,
+                subject: `Final-web - Nhận tiền từ ${req.body.fullname}`,
+                text: `Nhận ${req.body.money} và phí 5% là ${req.body.fee}
+                    Với lời nhắn từ người gửi là: ${req.body.note}
+                    Số tiền hiện có là ${receiver.money}
+                `
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+
+                }
+            });
         })
+            
+        }else{
+            return res.json('thất bại')
+
+        }
     };
 
     charge(req, res, next) {
@@ -121,6 +179,7 @@ class CustomerController {
             return res.json('1 ngày chỉ được rút tiền 2 lần')
         }else{
         var phantram = req.body.money*105/100
+
         Users.updateOne({username: req.body.username}, {$inc: {money: -phantram}, $push: {history: req.body}}, (err, status)=>{
             if(err){
                 console.log(err)
@@ -209,10 +268,18 @@ class CustomerController {
     };
 
     buySuccess(req, res, next){
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
         var totalMoney = req.body.money
         var nhamang = req.body.nhamang
-        Users.updateOne({username: req.body.username}, {$inc: {money: -totalMoney}, $push: {history: req.body}}, (err, status)=>{
-        return res.render('customer/buy',
+        Promise.all([
+            Users.findOne({_id: decodeToken}),
+            Users.updateOne({username: req.body.username}, {$inc: {money: -totalMoney}, $push: {history: req.body}})
+            ])
+        .then(([data,update])=>{
+            if(data){
+                req.data = data
+                return res.render('customer/buy',
             {
                 user: mongooseToObject(data),
                 title: 'Banking',
@@ -220,6 +287,7 @@ class CustomerController {
                 mathe: req.body.cardnumber,
                 nhamang: nhamang
             })
+            }
         })
     }
 }

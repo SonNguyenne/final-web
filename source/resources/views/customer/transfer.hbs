@@ -1,0 +1,118 @@
+<div class=" transfer-base container-fluid px-0" id="bg-div">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-12">
+            <div class="card card0">
+                <div class="d-flex" id="wrapper">
+                    <!-- Sidebar -->
+                    <div class="bg-light border-right" id="sidebar-wrapper">
+                        <div class="sidebar-heading pt-5 pb-4"><strong>PAY WITH</strong></div>
+                        <div class="list-group list-group-flush"> <a data-toggle="tab" href="#menu1" id="tab1"
+                                class="tabs list-group-item bg-light">
+
+                            </a> <a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item active1">
+                                <div class="list-div my-2">
+                                    <div class="fa fa-credit-card"></div> &nbsp;&nbsp; Card
+                                </div>
+
+                            </a> </div>
+                    </div> <!-- Page Content -->
+                    <div id="page-content-wrapper">
+                        <div class="row pt-3" id="border-btm">
+                            <div class="col-8">
+                                <div class="row justify-content-right">
+                                    <div class="col-12">
+                                        <p class="mb-0 mr-4 mt-4 text-right">customer@email.com</p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-right">
+                                    <div class="col-12">
+                                        <p class="mb-0 mr-4 text-right">Pay <span class="top-highlight">$ 100</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="text-center" id="test"></div>
+                        </div>
+
+                        <div id="menu2" class="tab-pane in active">
+                            <div class="row justify-content-center">
+                                <div class="col-11">
+                                    <div class="form-card">
+                                        <h3 class="mt-0 mb-4 text-center">Chuyển tiền</h3>
+                                        <form action="/customer/transfer-success" method="post">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="input-group"> <input type="text" id="cr_no" name="phone"
+                                                            placeholder="0000 000 000 " minlength="10" maxlength="19">
+                                                        <label>PHONE NUMBER</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="input-group"> <input type="text" name="money" id="money"
+                                                            placeholder="xxx.xxx.xxx VND" onkeyup="getMoney()">
+                                                        <label>Money
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="input-group"> <input type="text" name="note"
+                                                            placeholder="&#9679;&#9679;&#9679;" class="placeicon"
+                                                            > <label>Note</label> </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="row ">
+                                                <label class="fomr-control">Người trả phí</label>
+                                                <div class="radio col-6"> 
+                                                    <input class="m-0" id="radio-1" value="receiver" name="payer" type="radio" checked>
+                                                    <label for="radio-1" class="radio-label">Người nhận</label>
+                                                </div>
+                                                <div class="radio col-6">
+                                                    <input id="radio-2" name="payer" value="sender" type="radio">
+                                                    <label for="radio-2" class="radio-label">Người gửi</label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="my-2"style="background-color:rgba(175, 172, 172, 0.1);font-size:14px">
+                                                <strong>Phí rút tiền là 5% mỗi lần rút: <strong id="fee-display" name="fee"
+                                                        style="color: red"></strong></strong>
+                                                <br>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-12"> <input type="submit" value="Gửi"
+                                                        class="btn btn-success placeicon"> </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="text-center mb-5" id="below-btn"><a href="#">Use a test
+                                                            card</a></p>
+                                                </div>
+                                            </div>
+                                            <input name="fee" value="" id="fee">
+                                            <input name="fullname" value="{{user.fullname}}">
+                                            <input name="username" value="{{user.username}}" >
+                                            <input name="type" value="chuyenTien">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

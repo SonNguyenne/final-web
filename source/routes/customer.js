@@ -14,7 +14,8 @@ const Users = require('../models/user')
 
 const customerController = require('../controllers/customerController');
 
-router.use('/banking', customerController.banking);
+router.use('/transfer', customerController.transfer);
+router.use('/transfer-success', customerController.transferSuccess);
 
 router.use('/history', customerController.history);
 
@@ -36,6 +37,7 @@ router.post('/buy-success', customerController.buySuccess);
 
 //edit
 router.post('/edit-cmnd', customerController.edit);
+
 
 
 // [link bien dong] /show || /user/:slug

@@ -237,7 +237,8 @@ function withdrawIdCheck(){
 
 function getMoney(){
     const wMoney = document.getElementById("money").value;
-    document.getElementById("fee").innerHTML = wMoney*0.05;
+    document.getElementById("fee-display").innerHTML = Math.floor(wMoney*0.05);
+    document.getElementById('fee').value = Math.floor(wMoney*0.05);
 }
 
 //=====================buy the dien thoai===
