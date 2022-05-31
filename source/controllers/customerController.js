@@ -49,34 +49,35 @@ class CustomerController {
     };
 
 
+    
     transfer(req, res, next) {
         var token = req.cookies.token;
         var decodeToken = jwt.verify(token, secret)
-        Users.findOne({
-            _id: decodeToken
-        }).then(data => {
-            if (data) {
-                req.data = data
-                // console.log(data)
-                return res.render('customer/transfer',
-                    {
-                        user: mongooseToObject(data),
-                        title: 'Banking',
-                        layout: 'main',
-                    })
-                next()
-            }
-        }
-        )
+        Promise.all([Users.find({}), Users.findOne({ _id: decodeToken })])
+            .then(([userList, data]) => {
+                if (data) {
+                    req.data = data
+                    // console.log(userList)
+                    return res.render('customer/transfer',
+                        {
+                            user: mongooseToObject(data),
+                            userList: multipleMongooseToObject(userList)
+                        })
+                 
+                }
+            })
+            .catch(next)
     };
 
 
     transferSuccess(req, res, next) { 
         if(req.body.payer == 'receiver'){
-        var totalMoney = req.body.money - req.body.fee
+
+        var totalMoney = parseInt(req.body.money) - parseInt(req.body.fee)
+
+
         Promise.all([
-            Users.findOne({phone: req.body.phone}),
-            Users.updateOne({phone: req.body.phone}, {$inc: {money: totalMoney}, $push: {history: req.body}}),
+            Users.findOneAndUpdate({phone: req.body.phone}, {$inc: {money: totalMoney}, $push: {history: req.body}}),
             Users.findOneAndUpdate({username: req.body.username}, {$inc: {money: -req.body.money}, $push: {history: req.body}})
         ])
         .then((receiver,sender)=>{
@@ -88,13 +89,54 @@ class CustomerController {
                 }
             });
 
+        
+            var balanceMoney =parseInt(receiver[0].money) +  parseInt(totalMoney) ;
             var mailOptions = {
                 from: process.env.GMAIL,
-                to: receiver.email,
+                to: receiver[0].email,
                 subject: `Final-web - Nhận tiền từ ${req.body.fullname}`,
                 text: `Nhận ${req.body.money} và phí 5% là ${req.body.fee}
                     Với lời nhắn từ người gửi là: ${req.body.note}
-                    Số tiền hiện có là ${receiver.money}
+                    Số tiền hiện có là ${balanceMoney}
+                `
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+
+                }
+            });
+            
+        })
+            
+        }else{
+            var totalMoneyFee = parseInt(req.body.money) + parseInt(req.body.fee)
+            console.log(totalMoneyFee)
+        Promise.all([
+            Users.findOneAndUpdate({phone: req.body.phone}, {$inc: {money: req.body.money}, $push: {history: req.body}}),
+            Users.findOneAndUpdate({username: req.body.username}, {$inc: {money: -totalMoneyFee}, $push: {history: req.body}})
+        ])
+        .then((receiver,sender)=>{
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: "ts29032001@gmail.com",
+                    pass: "123456son"
+                }
+            });
+
+            var totalM = receiver[0].money + req.body.money
+
+            var mailOptions = {
+                from: process.env.GMAIL,
+                to: receiver[0].email,
+                subject: `Final-web - Nhận tiền từ ${req.body.fullname}`,
+                text: `Nhận ${req.body.money} và phí 5% là ${req.body.fee}
+                    Với lời nhắn từ người gửi là: ${req.body.note}
+                    Số tiền hiện có là ${totalM}
                 `
             };
 
@@ -107,11 +149,9 @@ class CustomerController {
                 }
             });
         })
-            
-        }else{
-            return res.json('thất bại')
 
         }
+        res.redirect('transfer')
     };
 
     charge(req, res, next) {

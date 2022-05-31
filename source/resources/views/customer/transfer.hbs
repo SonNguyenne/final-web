@@ -5,13 +5,13 @@
                 <div class="d-flex" id="wrapper">
                     <!-- Sidebar -->
                     <div class="bg-light border-right" id="sidebar-wrapper">
-                        <div class="sidebar-heading pt-5 pb-4"><strong>PAY WITH</strong></div>
+                        <div class="sidebar-heading pt-5 pb-4"><strong>Transfer</strong></div>
                         <div class="list-group list-group-flush"> <a data-toggle="tab" href="#menu1" id="tab1"
                                 class="tabs list-group-item bg-light">
 
                             </a> <a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item active1">
                                 <div class="list-div my-2">
-                                    <div class="fa fa-credit-card"></div> &nbsp;&nbsp; Card
+                                    <div class="fa fa-credit-card"></div> EWallet
                                 </div>
 
                             </a> </div>
@@ -21,12 +21,12 @@
                             <div class="col-8">
                                 <div class="row justify-content-right">
                                     <div class="col-12">
-                                        <p class="mb-0 mr-4 mt-4 text-right">customer@email.com</p>
+                                        <p class="mb-0 mr-4 mt-4 text-right">{{user.email}}</p>
                                     </div>
                                 </div>
                                 <div class="row justify-content-right">
                                     <div class="col-12">
-                                        <p class="mb-0 mr-4 text-right">Pay <span class="top-highlight">$ 100</span>
+                                        <p class="mb-0 mr-4 text-right">Pay <span class="top-highlight" id="user-money">{{user.money}} VND</span>
                                         </p>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                             <div class="text-center" id="test"></div>
                         </div>
 
-                        <div id="menu2" class="tab-pane in active">
+                       <div id="menu2" class="tab-pane in active">
                             <div class="row justify-content-center">
                                 <div class="col-11">
                                     <div class="form-card">
@@ -44,16 +44,25 @@
                                         <form action="/customer/transfer-success" method="post">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="input-group"> <input type="text" id="cr_no" name="phone"
-                                                            placeholder="0000 000 000 " minlength="10" maxlength="19">
+                                                    <div class="input-group phone-number-input-group"> 
+                                                        <input type="text" id="phone-number-input" name="phone"
+                                                            placeholder="0000 000 000 " minlength="10" maxlength="19" onchange="checkPhoneNumber()">
                                                         <label>PHONE NUMBER</label>
+                                                    </div>
+                                                    <div id="fail-finding-phone" style="font-size:14px; padding: 1px; margin-top: -25px; color:red; padding-left:2px" hidden>Số điện thoại không tồn tại !</div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="input-group"> 
+                                                        <input id="receiver-name" class="mb-4" disabled hidden>
+                                                        <label>RECEIVER NAME</label>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-12">
-                                                    <div class="input-group"> <input type="text" name="money" id="money"
+                                                <div class="col-12 ">
+                                                    <div class="input-group"> 
+                                                        <input type="text" name="money" id="money"
                                                             placeholder="xxx.xxx.xxx VND" onkeyup="getMoney()">
                                                         <label>Money
                                                         </label>
@@ -116,3 +125,7 @@
     </div>
 </div>
 </div>
+
+{{#userList}}
+    <div class="user-phone-list" user-fullname="{{this.fullname}}">{{this.phone}}</div>
+{{/userList}}

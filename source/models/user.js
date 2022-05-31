@@ -34,7 +34,7 @@ const User = new mongoose.Schema({
     //history
     history : [{
         username: { type: String, },
-        receiver: { type: String, },
+        phone: { type: String, },
         type: { type: String},
         money: { type: Number},
         note: { type: String, },

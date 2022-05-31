@@ -1,6 +1,7 @@
 
 //=====================Login================
 
+
 function login() {
     $.ajax({
         url: '/login',
@@ -323,19 +324,32 @@ $('#amount').on('change', function() {
     })
 });
 
-function formatNumber(num) {
-    var first = num.split(',');
-    var digits = first[0].split('').reverse();
-    var new_digits = [];
-    for(var i =0; i<digits.length; i++) {
-      if((i+1)%3==0) {
-        new_digits.push(digits[i]);
-        new_digits.push('.');
-      }
-      else {
-        new_digits.push(digits[i]);
-      }
+
+
+var totalmoney = $('#total-money-show').text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+$('#total-money-show').text(totalmoney);
+
+var usermoney = $('#user-money').text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+$('#user-money').text(usermoney);
+
+
+
+function checkPhoneNumber(){
+    var phoneNumberInput = document.getElementById("phone-number-input").value;
+    var userPhoneList = document.getElementsByClassName('user-phone-list')
+
+    for (var i = 0; i < userPhoneList.length; i++) {
+        if(userPhoneList[i].innerHTML == phoneNumberInput ){
+            var userName = userPhoneList[i].getAttribute('user-fullname')
+            $('#receiver-name').attr('value', userName); 
+            document.getElementById('receiver-name').removeAttribute('hidden')
+            document.getElementById('fail-finding-phone').setAttribute('hidden','hidden')
+            break;
+        }
+        else{
+            document.getElementById('fail-finding-phone').removeAttribute('hidden')
+            document.getElementById('receiver-name').setAttribute('hidden','hidden')
+        }
     }
-    var new_num = new_digits.reverse().join("")+','+first[1];
-    return new_num;
-  }
+    
+}

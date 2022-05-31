@@ -79,5 +79,6 @@ module.exports = {
         default:
             return options.inverse(this);
     }
-    }
+    },
+    
   }

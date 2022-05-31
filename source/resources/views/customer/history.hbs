@@ -17,11 +17,10 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Username</th>
                                 <th>Time</th>
-                                <th>Withdraw</th>
-                                <th>Hoạt Động</th>
-                                <th>Note</th>
+                                <th>Money/th>
+                                <th>Action</th>
+                                <th>Details</th>
                             </tr>
                         </thead>
                        
@@ -33,7 +32,6 @@
 
                             <tr>
                                 <td>{{sum @index 1}}</td>
-                                <td>{{this.username}}</td>
                                 <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
                                 
                                 <td>{{this.money}}</td>
@@ -41,11 +39,8 @@
                                     {{this.type}}
                                 </td>
                                 <td>
-                                {{#ifeq this.type "muaTheDienThoai"}}
-                                    {{this.cardnumber}}
-                                {{/ifeq}}
-                                {{this.note}}
-                                </td>
+									<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter">
+									Details</Details></button></td>
                             </tr>
                             {{/each}}
                         </tbody>
@@ -55,3 +50,46 @@
             </div>
         </div>
     </main>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Đổi Ảnh cá nhân</h5>
+        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Time</th>
+                                <th>Money </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                       
+                        <tbody>
+                            {{#each user.history}}
+
+                            <tr>
+                                <td>{{sum @index 1}}</td>
+                                <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
+                                
+                                <td>{{this.money}}</td>
+                                <td>
+                                    {{this.type}}
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+      </div>
+    </div>
+  </div>
+</div>

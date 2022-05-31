@@ -27,19 +27,23 @@
                         </thead>
                        
                         <tbody>
-                            
+                            {{#each userList}}
+                            {{#each this.history}}
+
                             <tr>
-                                <td>Gavin Joyce</td>
-                                <td>Developer</td>
-                                <td>Edinburgh</td>
-                                <td>42</td>
-                                <td>2010/12/22</td>
-                                <td class="text-danger font-weight-bold">$92,575</td>
+                                <td>{{sum @index 1}}</td>
+                                <td>{{moment this.this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
+                                
+                                <td>{{this.this.money}}</td>
                                 <td>
-                                    <button class="btn-xs btn-success">Accept</button>
-                                    <button class="btn-xs btn-danger">Decline</button>
+                                    {{this.type}}
                                 </td>
+                                <td>
+									<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter">
+									Details</Details></button></td>
                             </tr>
+                            {{/each}}
+                            {{/each}}
                         </tbody>
                     </table>
                     </div>

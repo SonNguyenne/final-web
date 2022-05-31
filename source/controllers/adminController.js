@@ -94,11 +94,27 @@ class AdminController {
 
     /////
     transactionManage(req, res, next) {
-        res.render('admin/transactionManage', {
-            title: 'Transaction',
-            layout: 'adminLayout',
-        })
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+        Promise.all([Users.find({}), Users.findOne({ _id: decodeToken }), Users.findOne({ history: decodeToken})])
+            .then(([userList, data]) => {
+                if (data) {
+                    req.data = data
+                    // console.log(userList)
+                    return res.render('admin/transactionManage',
+                        {
+                            user: mongooseToObject(data),
+                            userList: multipleMongooseToObject(userList),
+                            layout: 'adminLayout'
+                        })
+                    }      
+                }   
+            )
+        .catch(next)
     };
+
+
+
 
     withdrawManage(req, res, next) {
 
