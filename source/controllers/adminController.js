@@ -8,6 +8,7 @@ var secret = 'secretpasstoken'
 
 class AdminController {
 
+    //[get:] Index
     index(req, res, next) {
 
         var token = req.cookies.token;
@@ -28,6 +29,8 @@ class AdminController {
         }
         )
     }
+
+    //[get:] error
 
     error(req, res, next) {
         res.render('partials/error', {
@@ -91,6 +94,14 @@ class AdminController {
                 res.redirect('back')
             })
     }
+
+    cancle(req, res, next) {
+        Users.updateOne({ _id: req.params.id }, { $set: { banCheck: true, countFailed: 6 } })
+            .then(() => {
+                res.redirect('back')
+            })
+    }
+
 
     /////
     transactionManage(req, res, next) {

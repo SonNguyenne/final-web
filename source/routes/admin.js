@@ -34,7 +34,11 @@ router.get('/unBan/:id',adminController.unBan)
 //verify user
 router.get('/verify/:id', adminController.verify)
 
-router.use('/', isLoggined,isAdmin, adminController.index)
+//cancle user
+router.get('/cancle/:id', adminController.cancle)
+
+
+router.use('/', isLoggined, isAdmin, adminController.index)
 
 
 

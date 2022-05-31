@@ -10,7 +10,9 @@
           <a class="subnav-dropdown-items" href="/customer/{{user.slug}}"><i class="fa fa-address-card"></i> My
             Account</a>
           <hr>
-          <a class="subnav-dropdown-items" href="/customer/history"><i class="fa fa-book"></i> Lịch sử</a>
+          <a class="subnav-dropdown-items" href="/customer/history"><i class="fa fa-book"></i> History</a>
+          <hr>
+           <a class="subnav-dropdown-items" href="/resetPassword"><i class="fa fa-password"></i> Change Password</a>
           <hr>
           <a class="subnav-dropdown-items" href="#"><i class="fas fa-money-bill-alt" ></i> <span id="total-money-show"> {{user.money}}</span>VND</a>
           <hr>
@@ -28,6 +30,10 @@
           <a class="subnav-dropdown-items" href="/customer/{{user.slug}}"><i class="fa fa-address-card"></i> My
             Account</a>
           <hr>
+          
+           <a class="subnav-dropdown-items" href="/resetPassword"><i class="fa fa-password"></i> Change Password</a>
+          <hr>
+
           <a class="subnav-dropdown-items" href="#"><i class="fas fa-money-bill-alt"></i> {{user.money}}VND</a>
           <hr>
           <a class="subnav-dropdown-items" onclick="logout()"><i class='fas fa-sign-out-alt'></i> Log out</a>
@@ -41,13 +47,23 @@
 
 
 <header class="main-header" id="main-header">
-  <a href="/" class="logo-icon-header">
-    <div id="logo-header">Son<span>Handsome</span></div>
-  </a>
+  <div class="row">
+    <div class="col-8 col-md-9">
+      <a href="/" class="logo-icon-header">
+        <div id="logo-header">Son<span>Handsome</span></div>
+      </a>
+    </div>
+
+    <div class="col-4 col-md-3">
+      <a class="icon logo-icon-header icon-responsive">
+      <i class="fa fa-bars"></i>
+    </a>
+    </div>
+  </div>
 
 
-  <nav>
-    <ul class="">
+  <nav class="navbar-dropdown-items" id="navbar-dropdown-items">
+    <ul>
       {{!-- more than 6 is not beautiful --}}
       {{#ifeq user.permission 'Verified'}}
       <a href="/customer/withdraw">
@@ -68,9 +84,6 @@
         <li>Admin</li>
       </a>
       {{/ifeq }}
-      <a href="javascript:void(0);" class="icon logo-icon-header" onclick="openNavResponsive()">
-        <i class="fa fa-bars"></i>
-      </a>
 
     </ul>
   </nav>

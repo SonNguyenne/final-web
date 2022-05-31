@@ -53,7 +53,7 @@ function isAdmin(req, res, next) {
 
 // Check Verify
 function isVerify(req,res,next){
-    if(req.data.permission !== 'Verify'){
+    if(req.data.permission !== 'Verified'){
         Users.findOne({name: req.data.name})
             .then (user =>{
             res.render('partials/error', {

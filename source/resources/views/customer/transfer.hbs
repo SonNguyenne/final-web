@@ -44,12 +44,12 @@
                                         <form action="/customer/transfer-success" method="post">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="input-group phone-number-input-group"> 
+                                                    <div class="input-group"> 
                                                         <input type="text" id="phone-number-input" name="phone"
                                                             placeholder="0000 000 000 " minlength="10" maxlength="19" onchange="checkPhoneNumber()">
                                                         <label>PHONE NUMBER</label>
                                                     </div>
-                                                    <div id="fail-finding-phone" style="font-size:14px; padding: 1px; margin-top: -25px; color:red; padding-left:2px" hidden>Số điện thoại không tồn tại !</div>
+                                                    <div id="fail-finding-phone" style="font-size:14px; padding: 1px; margin-top: -25px; color:red; padding-left:2px" hidden> Số điện thoại không tồn tại !</div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="input-group"> 
@@ -108,10 +108,10 @@
                                                             card</a></p>
                                                 </div>
                                             </div>
-                                            <input name="fee" value="" id="fee">
-                                            <input name="fullname" value="{{user.fullname}}">
-                                            <input name="username" value="{{user.username}}" >
-                                            <input name="type" value="chuyenTien">
+                                            <input name="fee" value="" id="fee" hidden>
+                                            <input name="fullname" value="{{user.fullname}}" hidden>
+                                            <input name="username" value="{{user.username}}" hidden>
+                                            <input name="type" value="chuyenTien" hidden>
                                         </form>
                                     </div>
                                 </div>
@@ -127,5 +127,5 @@
 </div>
 
 {{#userList}}
-    <div class="user-phone-list" user-fullname="{{this.fullname}}">{{this.phone}}</div>
+    <div class="user-phone-list" user-fullname="{{this.fullname}}" hidden>{{this.phone}}</div>
 {{/userList}}

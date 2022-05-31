@@ -18,7 +18,7 @@ class CustomerController {
             if (data) {
                 req.data = data
                 // console.log(data)
-                return res.render('customer',
+                return res.render('index',
                     {
                         user: mongooseToObject(data)
                     })
@@ -265,6 +265,26 @@ class CustomerController {
             )
         .catch(next)
     };
+
+
+    historyDetails(req, res,err){
+        var token = req.cookies.token;
+        var decodeToken = jwt.verify(token, secret)
+        Users.findOne({ _id: decodeToken })
+            .then(([data]) => {
+                if (data) {
+                    req.data = data
+                    // console.log(userList)
+                    return res.render('customer/historyDetails',
+                        {
+                            user: mongooseToObject(data),
+                            layout: 'main'
+                        })
+                    }      
+                }   
+            )
+        .catch(err)
+    }
 
 
 

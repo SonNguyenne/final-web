@@ -18,6 +18,7 @@ router.use('/transfer', customerController.transfer);
 router.use('/transfer-success', customerController.transferSuccess);
 
 router.use('/history', customerController.history);
+router.use('/history-detail/:id', customerController.historyDetails);
 
 // nap tien
 
@@ -41,9 +42,9 @@ router.post('/edit-cmnd', customerController.edit);
 
 
 // [link bien dong] /show || /user/:slug
-router.use('/:slug', customerController.detail)
+router.use('/:slug',  customerController.detail)
 
 
-router.use('/',isLoggined,customerController.index)
+router.use('/',isLoggined, isVerify,customerController.index)
 
 module.exports = router;

@@ -221,7 +221,7 @@ function withdrawIdCheck(){
 
 
     if ((wCreditId == 111111) && (wExpiredDate == '10/10/2022') && (wCvvId == 411)) {
-        if(wMoney % 50000 == 0){
+        if(wMoney % 50000 != 0){
         alert('Số tiền mỗi lần rút phải là bội số của 50.000')
         }else{
             var withdrawForm = document.forms['withdraw-form']
@@ -236,6 +236,7 @@ function withdrawIdCheck(){
     }
 }
 
+//============ display fee ==============
 function getMoney(){
     const wMoney = document.getElementById("money").value;
     document.getElementById("fee-display").innerHTML = Math.floor(wMoney*0.05);
@@ -326,6 +327,7 @@ $('#amount').on('change', function() {
 
 
 
+//================== format money ===========
 var totalmoney = $('#total-money-show').text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 $('#total-money-show').text(totalmoney);
 
@@ -334,6 +336,7 @@ $('#user-money').text(usermoney);
 
 
 
+//============= check number to display user in transfer
 function checkPhoneNumber(){
     var phoneNumberInput = document.getElementById("phone-number-input").value;
     var userPhoneList = document.getElementsByClassName('user-phone-list')
@@ -353,3 +356,8 @@ function checkPhoneNumber(){
     }
     
 }
+
+$('.icon-responsive').on('click', function() {
+    $('#navbar-dropdown-items').attr('style', 'display: block');
+})
+

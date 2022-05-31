@@ -1,0 +1,928 @@
+[{
+  "_id": {
+    "$oid": "628f2be8c7717df0b98e96b6"
+  },
+  "roles": "admin",
+  "username": "admin",
+  "password": "$2b$04$2gPHAUjmy8sTB7CtQ4j6HeIGhYGS78QcFvrIW7UX0wmiisN.EwKeO",
+  "permission": "Verified",
+  "banCheck": false,
+  "money": 498975000,
+  "history": [
+    {
+      "username": "admin",
+      "type": "muaTheDienThoai",
+      "money": 20000,
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653813069514"
+        }
+      },
+      "_id": {
+        "$oid": "62933083059f5554358043d8"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "muaTheDienThoai",
+      "money": 100000,
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653813069514"
+        }
+      },
+      "_id": {
+        "$oid": "629330b0059f5554358043e0"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "muaTheDienThoai",
+      "money": 100000,
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653813479453"
+        }
+      },
+      "_id": {
+        "$oid": "629330e8d5ae7eef0d7a4975"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "muaTheDienThoai",
+      "money": 100000,
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653813607578"
+        }
+      },
+      "_id": {
+        "$oid": "629331682a08d92544da3e5a"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925398447"
+        }
+      },
+      "_id": {
+        "$oid": "6294e62a0b8417614164e6da"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925442077"
+        }
+      },
+      "_id": {
+        "$oid": "6294e642ab7817f10a077ba2"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925461527"
+        }
+      },
+      "_id": {
+        "$oid": "6294e656a9e7dc8550e7ef51"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925461527"
+        }
+      },
+      "_id": {
+        "$oid": "6294e658a9e7dc8550e7ef5a"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925469492"
+        }
+      },
+      "_id": {
+        "$oid": "6294e65e44b151cdef8c9f4f"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925469492"
+        }
+      },
+      "_id": {
+        "$oid": "6294e65e44b151cdef8c9f54"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925469492"
+        }
+      },
+      "_id": {
+        "$oid": "6294e66744b151cdef8c9f60"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925566061"
+        }
+      },
+      "_id": {
+        "$oid": "6294e6bec6b03448105e1cef"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925573721"
+        }
+      },
+      "_id": {
+        "$oid": "6294e6c65da484ab8e0c54a8"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 12345,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925607031"
+        }
+      },
+      "_id": {
+        "$oid": "6294e6e701413182282d4df3"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "haha",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653926179639"
+        }
+      },
+      "_id": {
+        "$oid": "6294e946aa534af24b0fae94"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": null,
+      "note": "",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653934931263"
+        }
+      },
+      "_id": {
+        "$oid": "62950d07760aae0b2299fd79"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "Son dep trai",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653936671568"
+        }
+      },
+      "_id": {
+        "$oid": "62951236e81b0a23e4bb9887"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "Son dep trai",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653936835810"
+        }
+      },
+      "_id": {
+        "$oid": "629512c4a3e99b64e3d48ca2"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "son dep trai",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653937088430"
+        }
+      },
+      "_id": {
+        "$oid": "629513cf5edb7e2cce2d3945"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653937193814"
+        }
+      },
+      "_id": {
+        "$oid": "62951438194e0abc43ae8a0d"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653937368378"
+        }
+      },
+      "_id": {
+        "$oid": "629514dc1ee2c424cc920c5c"
+      }
+    },
+    {
+      "username": "admin",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "haha",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653937530977"
+        }
+      },
+      "_id": {
+        "$oid": "629515b3e930c119eeeeea93"
+      }
+    },
+    {
+      "username": "admin",
+      "phone": "0967970238",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "Son dep trai",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653982075975"
+        }
+      },
+      "_id": {
+        "$oid": "6295c38aebf68c177e86539a"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1653550056588"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1653990185661"
+    }
+  },
+  "slug": "admin",
+  "__v": 0,
+  "countFailed": 0,
+  "phone": "123456789"
+},{
+  "_id": {
+    "$oid": "628f2c28c7717df0b98e96c3"
+  },
+  "roles": "user",
+  "username": "6194889569",
+  "password": "$2b$10$MCvxYj9R/DlR9vYL6xVfSuMLbo1E.WteAntEplD/Gu.EUzafw9SAi",
+  "phone": "0967970238",
+  "email": "ts29032001@gmail.com",
+  "fullname": "Thanh Son",
+  "birthday": "2000-01-01",
+  "address": "Thai Phien",
+  "cmndfront": "uploads/1653560663329--images.jpg",
+  "cmndback": "uploads/1653560720270--nike.png",
+  "countlogin": "1",
+  "countFailed": 0,
+  "permission": "Verified",
+  "banCheck": false,
+  "money": 30700000,
+  "history": [
+    {
+      "username": "admin",
+      "phone": "0967970238",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "Son dep trai",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653982075975"
+        }
+      },
+      "_id": {
+        "$oid": "6295c38aebf68c177e865398"
+      }
+    },
+    {
+      "username": "6194889569",
+      "phone": "0364789243",
+      "type": "chuyenTien",
+      "money": 9797979,
+      "note": "ahahha",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653983206248"
+        }
+      },
+      "_id": {
+        "$oid": "6295c816dea49e8159c47210"
+      }
+    },
+    {
+      "username": "6194889569",
+      "phone": "0364789243",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "ahahha",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653983366601"
+        }
+      },
+      "_id": {
+        "$oid": "6295c89c47ee89c895551aad"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "rutTien",
+      "money": 6000000,
+      "note": "di an lau",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653991719604"
+        }
+      },
+      "_id": {
+        "$oid": "6295e971d23a3be573a86c46"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1653550120406"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1653991793940"
+    }
+  },
+  "slug": "6194889569",
+  "__v": 0,
+  "countWithdraw": 2
+},{
+  "_id": {
+    "$oid": "628f5557c4cd44d8b7dd07f8"
+  },
+  "roles": "user",
+  "username": "9624061387",
+  "password": "$2b$10$6.zsuDI9sYGdd1GO9ZKAa.ylo5xNvM3mtrZ5WSqAFtm2JHvhaG/4O",
+  "phone": "123345",
+  "email": "123345@gmail.com",
+  "fullname": "AI biet",
+  "birthday": "2000-01-01",
+  "address": "12312",
+  "cmndfront": "uploads/1653560663329--images.jpg",
+  "cmndback": "uploads/1653560663332--atai.jpg",
+  "countlogin": "0",
+  "countFailed": 0,
+  "permission": "Not Verified",
+  "banCheck": false,
+  "money": 0,
+  "history": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1653560663476"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1653993247694"
+    }
+  },
+  "slug": "9624061387",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628f557cc4cd44d8b7dd07fd"
+  },
+  "roles": "user",
+  "username": "6259804677",
+  "password": "$2b$10$U9JyGsKv4xr34FuTPBUbA.S3GAnrnv/DK9/.p5UmohoUBQPXYKw8K",
+  "phone": "1234323",
+  "email": "1234323@gmail.com",
+  "fullname": "SOntun",
+  "birthday": "2000-01-01",
+  "address": "321",
+  "cmndfront": "uploads/1653560699855--519h0227.png",
+  "cmndback": "uploads/1653560699919--file1 - Copy.jpg",
+  "countlogin": "0",
+  "countFailed": 0,
+  "permission": "Not Verified",
+  "banCheck": false,
+  "money": 0,
+  "history": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1653560700049"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1653562558355"
+    }
+  },
+  "slug": "6259804677",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628f5590c4cd44d8b7dd0802"
+  },
+  "roles": "user",
+  "username": "9454577066",
+  "password": "$2b$10$hDyN4KkDWimOPrZVyqST/OmFfhafKGXgHOd2zx3nihs5qFm/PeHGm",
+  "phone": "09673322322318",
+  "email": "09673322322318@gmail.com",
+  "fullname": "3213123",
+  "birthday": "2000-01-01",
+  "address": "4142",
+  "cmndfront": "uploads/1653560720270--nike.png",
+  "cmndback": "uploads/1653560720277--Untitled.png",
+  "countlogin": "0",
+  "countFailed": 0,
+  "permission": "Verified",
+  "banCheck": false,
+  "money": 0,
+  "history": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1653560720394"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1653563124080"
+    }
+  },
+  "slug": "9454577066",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "628f586a5fe7b48d2aea60b2"
+  },
+  "roles": "user",
+  "username": "5573217397",
+  "password": "$2b$10$ubfZDHGuYYtVbziD2tNOvOojMyvqaCxU5gFCwz2P8HfAV2MDkNUDa",
+  "phone": "3231321312",
+  "email": "haha@gmail.com",
+  "fullname": "haha",
+  "birthday": "2000-01-01",
+  "address": "321",
+  "cmndfront": "uploads/1653561450140--zorolike.png",
+  "cmndback": "uploads/1653561450153--WIN_20200617_10_26_54_Pro.jpg",
+  "countlogin": "0",
+  "countFailed": 6,
+  "permission": "Not Verified",
+  "banCheck": true,
+  "money": 0,
+  "history": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1653561450294"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1653562566521"
+    }
+  },
+  "slug": "5573217397",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62944c7d5348ed5f32013bc7"
+  },
+  "roles": "user",
+  "username": "5745920044",
+  "password": "$2b$10$/FVjVcMX/gt1EPCV7jloKOd03hrt8y0DGFtX4tBs6bSrGo7EnE5LC",
+  "phone": "0364789243",
+  "email": "nguyenanhtai.tdtu@gmail.com",
+  "fullname": "Nguyễn Anh Tài",
+  "birthday": "2001-08-09",
+  "address": "342/14 a ấp 3 xã Hiệp Phước Nhà Bè TP.HCM",
+  "cmndfront": "uploads/1653886077453--649af88f-5c7e-4406-81fc-5a2fad16b3fa.jpg",
+  "cmndback": "uploads/1653886077490--4824e7e7-4389-4ca3-98fe-3db6a84e0298.jpg",
+  "countlogin": "1",
+  "countFailed": 6,
+  "permission": "Verified",
+  "banCheck": true,
+  "money": 16708440,
+  "history": [
+    {
+      "username": "6194889569",
+      "type": "rutTien",
+      "money": 500000,
+      "note": "tìa ngu",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653887223789"
+        }
+      },
+      "_id": {
+        "$oid": "629451ccf72f225185311cba"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "rutTien",
+      "money": 500000,
+      "note": "Tài ngu",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653888213543"
+        }
+      },
+      "_id": {
+        "$oid": "629454eab8e4dd3d4613ec71"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "rutTien",
+      "money": 500000,
+      "note": "Tài ngu",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653888276790"
+        }
+      },
+      "_id": {
+        "$oid": "62945518ad4be1b5b782440f"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "rutTien",
+      "money": 500000,
+      "note": "Tài ngu",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653888317092"
+        }
+      },
+      "_id": {
+        "$oid": "629455424c7134471e621529"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "rutTien",
+      "money": 500000,
+      "note": "Tài ngu",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653888581353"
+        }
+      },
+      "_id": {
+        "$oid": "629456593147919b29752e76"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 5000000,
+      "note": "Tài ngu",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653888734583"
+        }
+      },
+      "_id": {
+        "$oid": "629456f5caa9dfa6d9028912"
+      }
+    },
+    {
+      "username": "5745920044",
+      "type": "muaTheDienThoai",
+      "money": 100000,
+      "cardnumber": "2222226621,",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653886017672"
+        }
+      },
+      "_id": {
+        "$oid": "629457235348ed5f32013bf4"
+      }
+    },
+    {
+      "username": "5745920044",
+      "type": "muaTheDienThoai",
+      "money": 100000,
+      "cardnumber": "2222226621,",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653886017672"
+        }
+      },
+      "_id": {
+        "$oid": "629457235348ed5f32013bf6"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 123,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925694829"
+        }
+      },
+      "_id": {
+        "$oid": "6294e74e4f7c077013bb6fa9"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 123,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925758750"
+        }
+      },
+      "_id": {
+        "$oid": "6294e78f7e574d4c770837a7"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 123,
+      "note": "123",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925842344"
+        }
+      },
+      "_id": {
+        "$oid": "6294e7d38ce8fe911e2b9b14"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 1,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925862022"
+        }
+      },
+      "_id": {
+        "$oid": "6294e7efb5833fa18f456f6e"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 1,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925903679"
+        }
+      },
+      "_id": {
+        "$oid": "6294e8182072f227377a50ea"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 1,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925931466"
+        }
+      },
+      "_id": {
+        "$oid": "6294e82c4907658751318ee7"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 1,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925931466"
+        }
+      },
+      "_id": {
+        "$oid": "6294e82c4907658751318eeb"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 1,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925961149"
+        }
+      },
+      "_id": {
+        "$oid": "6294e8495b0f4b0c169d1371"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 1,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925961149"
+        }
+      },
+      "_id": {
+        "$oid": "6294e85e5b0f4b0c169d137b"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 1,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653925961149"
+        }
+      },
+      "_id": {
+        "$oid": "6294e8705b0f4b0c169d137f"
+      }
+    },
+    {
+      "username": "6194889569",
+      "type": "chuyenTien",
+      "money": 1,
+      "note": "1",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653926046303"
+        }
+      },
+      "_id": {
+        "$oid": "6294e89f7a401bb29ccf2065"
+      }
+    },
+    {
+      "username": "6194889569",
+      "phone": "0364789243",
+      "type": "chuyenTien",
+      "money": 9797979,
+      "note": "ahahha",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653983206248"
+        }
+      },
+      "_id": {
+        "$oid": "6295c816dea49e8159c4720e"
+      }
+    },
+    {
+      "username": "6194889569",
+      "phone": "0364789243",
+      "type": "chuyenTien",
+      "money": 500000,
+      "note": "ahahha",
+      "createdAt": {
+        "$date": {
+          "$numberLong": "1653983366601"
+        }
+      },
+      "_id": {
+        "$oid": "6295c89c47ee89c895551aab"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1653886077878"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1653993285905"
+    }
+  },
+  "slug": "5745920044",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6295e0cdfe4a92f61aa6609b"
+  },
+  "roles": "user",
+  "username": "2887426989",
+  "password": "$2b$10$GGxOwXyruB29BJdmFeM1E.IHe6cAx1j1.3qV/DQwiq/kCJtII8AC.",
+  "phone": "03213151325",
+  "email": "caolamdiemvy.03@gmail.com",
+  "fullname": "Diem Vy",
+  "birthday": "2000-01-01",
+  "address": "Nha be",
+  "cmndfront": "uploads/1653989581848--download (1).jpg",
+  "cmndback": "uploads/1653989581849--download.jpg",
+  "countlogin": "1",
+  "countFailed": 6,
+  "permission": "Verified",
+  "banCheck": true,
+  "money": 0,
+  "history": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1653989581975"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1653993155678"
+    }
+  },
+  "slug": "2887426989",
+  "__v": 0
+}]

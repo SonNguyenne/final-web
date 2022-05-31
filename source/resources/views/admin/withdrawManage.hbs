@@ -16,29 +16,32 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Time</th>
-                                <th>Withdraw</th>
+                                <th>Sender</th>
+                                <th>Receiver</th>
+                                <th>Transfer</th>
+                                <th>Waiting Confirm</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                        
                         <tbody>
-
                             {{#each userList}}
-
-                            {{#each this.history}}
-
+                            {{#each history}}
+                            {{#ifCond this.money ">=" 5000000}}
+                            {{#ifeq this.type "rutTien"}}
                             <tr>
-                                <td>{{this.this.username}}</td>
-                                <td>{{moment this.this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
-                                
-                                <td>{{this.this.money}}</td>
+                                <td>{{this.username}}</td>
+                                <td>{{this.phone}}</td>
+                                <td>{{this.money}} VND</td>
+                                <td>Waiting Confirm</td>
                                 <td>
-                                    <button class="btn-xs btn-success">Accept</button>
-                                    <button class="btn-xs btn-danger">Decline</button>
+									<button class="btn btn-success">Accept</button>
+                                    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter">
+									Details</button>
                                 </td>
                             </tr>
+                            {{/ifeq}}
+                            {{/ifCond}}
                             {{/each}}
                             {{/each}}
                         </tbody>
@@ -48,3 +51,67 @@
             </div>
         </div>
     </main>
+
+
+
+
+
+
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Chi Tiết</h5>
+        <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                            <tr>
+                                <th>Sender</th>
+                                <th>Receiver</th>
+                                <th>Transfer</th>
+                                <th>Created At</th>
+                                <th>Type</th>   
+                                <th>Note</th>
+                                <th>Waiting Confirm</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                       
+                        <tbody>
+                            {{#each userList}}
+                            {{#each history}}
+                            {{#ifCond this.money ">=" 5000000}}
+                            {{#ifeq this.type "rutTien"}}
+                            <tr>
+                                <td>{{this.username}}</td>
+                                <td>{{this.phone}}</td>
+                                <td>{{this.money}} VND</td>
+                                <td>{{moment this.createdAt format = "HH:mm on DD/MM/yyyy"}}</td>
+                                
+                                <td>
+                                    {{this.type}}
+                                </td>
+                                <td>{{this.note}}</td>
+                                <td>Waiting Confirm</td>
+                                <td>
+									<button class="btn-xs btn-success">Accept</button>
+                                    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter">
+									Details</button>
+                                </td>
+                            </tr>
+                            {{/ifeq}}
+                            {{/ifCond}}
+                            {{/each}}
+                            {{/each}}
+                        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -49,7 +49,7 @@ class SiteController {
 
             //kiểm tra nếu count = 10 thì là đang khoá tạm thời
             if (user.countFailed == 6) {
-                return res.json(`Tài khoản đã bị khoá vĩnh viễn! Bạn đã nhập sai mật khẩu quá nhiều lần! Liên hệ admin để mở lại tài khoản`)
+                return res.json(`Tài khoản đã bị vô hiệu hóa! Liên hệ admin để mở lại tài khoản`)
             }
             bcrypt.compare(password, user.password, function (err, result) {
                 if (result) {
